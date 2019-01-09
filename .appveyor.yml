@@ -6,8 +6,9 @@ environment:
 platform:
   - x64 # 64-bit
 
-allow_failures:
-  - julia_version: latest
+matrix:
+  allow_failures:
+    - julia_version: latest
 
 branches:
   only:
