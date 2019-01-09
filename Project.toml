@@ -1,0 +1,12 @@
+name = "GmshReader"
+uuid = "82e2f556-b1bd-5f1a-9576-f93c0da5f0ee"
+authors = ["Pengcheng Shi"]
+version = "0.0.1"
+
+[deps]
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
