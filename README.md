@@ -12,4 +12,4 @@
 
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://github.com/shipengcheng1230/GmshReader.jl/dev)
 
-To read Gmsh mesh file.
+To read [Gmsh](http://gmsh.info/) mesh file.
