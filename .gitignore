@@ -2,3 +2,9 @@
 *.jl.*.cov
 *.jl.mem
 deps/deps.jl
+Manifest.toml
+.DS_Store
+
+docs/build/
+docs/site/
+docs/src/examples/generated
