@@ -1,4 +1,4 @@
-# GmshReader
+# GmshReader.jl
 
 [![Build Status](https://travis-ci.com/shipengcheng1230/GmshReader.jl.svg?branch=master)](https://travis-ci.com/shipengcheng1230/GmshReader.jl)
 [![Build status](https://ci.appveyor.com/api/projects/status/0kdir8heqsxu2jif/branch/master?svg=true)](https://ci.appveyor.com/project/shipengcheng1230/gmshreader-jl/branch/master)

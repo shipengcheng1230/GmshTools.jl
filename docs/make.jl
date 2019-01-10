@@ -7,7 +7,7 @@ using Documenter
 using DocumenterMarkdown
 using GmshReader
 
-include("generate.jl")
+# include("generate.jl")
 
 makedocs(
     doctest=false,

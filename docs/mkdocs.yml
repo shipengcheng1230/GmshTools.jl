@@ -58,3 +58,4 @@ docs_dir: 'build'
 
 nav:
   - Home: 'index.md'
+  - Examples: 'read_mesh_raw.md'
