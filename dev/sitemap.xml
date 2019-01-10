@@ -2,7 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://github.com/shipengcheng1230/GmshReader.jl/</loc>
-     <lastmod>2019-01-09</lastmod>
+     <lastmod>2019-01-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://github.com/shipengcheng1230/GmshReader.jl/read_mesh_raw/</loc>
+     <lastmod>2019-01-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
