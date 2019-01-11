@@ -1,4 +1,5 @@
 using Base.Threads
+using FEMBase
 
 const GmshCode2FEMBaseType = Dict(
     1 => Seg2,
