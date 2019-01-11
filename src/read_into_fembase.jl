@@ -1,5 +1,24 @@
 using Base.Threads
 
+const GmshCode2FEMBaseType = Dict(
+    1 => Seg2,
+    2 => Tri3,
+    3 => Quad4,
+    4 => Tet4,
+    5 => Hex8,
+    6 => Wedge6,
+    7 => Pyr5,
+    8 => Seg3,
+    9 => Tri6,
+    10 => Quad9,
+    11 => Tet10,
+    12 => Hex27,
+    15 => Poi1,
+    16 => Quad8,
+    17 => Hex20,
+    18 => Wedge15,
+    )
+
 function gmsh_read_mesh(fname::AbstractString)
     meshraw = read_gmsh_ascii(fname)
     nels = length(meshraw["Elements"]["tags"])
