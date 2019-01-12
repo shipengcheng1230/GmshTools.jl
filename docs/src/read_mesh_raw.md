@@ -19,6 +19,7 @@ Try the following code to view the mesh:
     wireframe!(scene[end][1], color=(:deepskyblue, 0.1), linewidth=3)
 
     # 3D Tetrahedron-4 Mesh
+    
     fname = joinpath(sampledir, "t3.msh")
     meshraw = read_gmsh_ascii(fname)
     coordinates = cat(meshraw["Nodes"]["xs"], meshraw["Nodes"]["ys"], meshraw["Nodes"]["zs"]; dims=2)

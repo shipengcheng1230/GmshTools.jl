@@ -13,9 +13,11 @@ To read the [Gmsh](http://gmsh.info/) mesh file.
 
 - Current only support **version 4** of **ASCII** mode.
 - The following tags will be omitted:
-  - `<$Periodic>`
-  - `<$NodeData>`
-  - `<$ElementData>`
-  - `<$ElementNodeData>`
-  - `<$InterpolationScheme>`
+    - `<$Periodic>`
+    - `<$NodeData>`
+    - `<$ElementData>`
+    - `<$ElementNodeData>`
+    - `<$InterpolationScheme>`
+
+
 - Element types of `Tri7` of [FEMBase](https://github.com/JuliaFEM/FEMBase.jl) is not supported since [Gmsh](http://gmsh.info/) does not have an equivalence type.
