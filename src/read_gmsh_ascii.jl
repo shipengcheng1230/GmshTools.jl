@@ -30,11 +30,11 @@ end
 
 function read_msh!(dict::AbstractDict, f::IOStream, ::Val{:Entities})
     numPoints, numCurves, numSurfaces, numVolumes = map(x->parse(Int, x), split(readline(f)))
-    dict["Entitity"] = Dict()
-    dict["Entitity"]["Points"] = read_entities_points(f, numPoints)
-    dict["Entitity"]["Curves"] = read_entities_curves(f, numCurves)
-    dict["Entitity"]["Surfaces"] = read_entities_surfaces(f, numSurfaces)
-    dict["Entitity"]["Volumes"] = read_entities_volumes(f, numVolumes)
+    dict["Entities"] = Dict()
+    dict["Entities"]["Points"] = read_entities_points(f, numPoints)
+    dict["Entities"]["Curves"] = read_entities_curves(f, numCurves)
+    dict["Entities"]["Surfaces"] = read_entities_surfaces(f, numSurfaces)
+    dict["Entities"]["Volumes"] = read_entities_volumes(f, numVolumes)
     verify_close_tag(f, "\$Entities")
 end
 

@@ -22,16 +22,17 @@ const GmshCode2FEMBaseType = Dict(
 
 function gmsh_read_mesh(fname::AbstractString)
     meshraw = read_gmsh_ascii(fname)
-    nels = length(meshraw["Elements"]["tags"])
-    els = Vector{Element}(undef, nels)
-    @inbounds @threads for i = 1: nels
+    nelements = length(meshraw["Elements"]["tags"])
+    elements = Vector{Element}(undef, nelements)
+    @inbounds @threads for i = 1: nelements
         eltype = GmshCode2FEMBaseType[meshraw["Elements"]["typeEles"][i]]
         elverts = meshraw["Elements"]["numVerts"][i]
-        els[i] = Element(eltype, elverts)
+        elements[i] = Element(eltype, elverts)
+        update!(elements[i], "tagEntity", meshraw["Elements"]["tagEntities"][i])
     end
     nodes = meshraw["Nodes"]
     nnodes = length(nodes["tags"])
     geometry = [nodes["tags"][i] => [nodes["xs"][i], nodes["ys"][i], nodes["zs"][i]] for i in 1: nnodes] |> Dict
-    update!(els, "geometry", geometry)
-    return els
+    update!(elements, "geometry", geometry)
+    return elements, meshraw
 end
