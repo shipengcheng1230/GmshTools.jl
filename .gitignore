@@ -1,7 +1,15 @@
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
+
+deps/downloads/
+deps/usr32/
+deps/usr64/
+deps/LICENSE
 deps/deps.jl
+deps/usr
+deps/*.log
+
 Manifest.toml
 .DS_Store
 

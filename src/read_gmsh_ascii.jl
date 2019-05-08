@@ -1,5 +1,7 @@
 using FileIO
 
+export read_gmsh_ascii
+
 function verify_close_tag(s1::S, s2::S; ctag="End"::S) where {S <: AbstractString}
     s1[1] * ctag * s1[2:end] == s2 || error("Unmatched close tag $s1, expected $s2")
 end
