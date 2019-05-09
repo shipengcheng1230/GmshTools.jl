@@ -23,31 +23,19 @@ if any(!satisfied(p; verbose=verbose) for p in products)
     try
         # Download and install binaries
         url, tarball_hash = choose_download(download_info)
-        download_path = joinpath(prefix, "download")
-        target_path = joinpath(download_path, basename(url))
-        mkpath(download_path)
-        download(url, target_path)
-
-        hash = open(target_path, "r") do f
-            bytes2hex(sha256(f))
+        try
+            install(url, tarball_hash; prefix=prefix, force=true, verbose=true)
+        catch e
+            tarball_path = joinpath(prefix, "download", basename(url))
+            run(pipeline(`unzip $tarball_path -d $(prefix.path)`))
         end
-        hash != tarball_hash && error("Downloaded file $(basename(url)) damaged, please retry.")
 
-        ext = splitext(url)[2]
-        if ext == ".tgz"
-            run(pipeline(`tar zxf $target_path --strip=1 --directory=$(prefix.path)`))
-        elseif ext == ".zip"
-            # unzip cannot strip the top level directory
-            run(pipeline(`unzip $target_path -d $(prefix.path)`))
-            content_path = joinpath(prefix, splitext(basename(url))[1])
-            foreach(
-                (x) -> mv(joinpath(content_path, x), joinpath(prefix, x); force=true),
-                readdir(content_path)
-                )
-            rm(content_path; force=true, recursive=true)
-        else
-            error("Extname $ext not implemented.")
-        end
+        content_path = joinpath(prefix, splitext(basename(url))[1])
+        foreach(
+            (x) -> mv(joinpath(content_path, x), joinpath(prefix, x); force=true),
+            readdir(content_path)
+            )
+        rm(content_path; force=true, recursive=true)
     catch e
         if typeof(e) <: ArgumentError
             error("Your platform $(Sys.MACHINE) is not supported by this package!")
@@ -56,5 +44,5 @@ if any(!satisfied(p; verbose=verbose) for p in products)
         end
     end
 
-    write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
+    # write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
 end
