@@ -8,14 +8,14 @@ products = Product[
 ]
 
 bin_prefix = "http://gmsh.info/bin"
-version = "4.2.2"
+version = "4.3.0"
 
 download_info = Dict(
-    Linux(:i686, :glibc) => ("$bin_prefix/Linux/gmsh-$version-Linux32-sdk.tgz", "58e7fdf9dbc83332bd661d19c8699ff0628d55737f63d383cbb07411cb7b3b06"),
-    Linux(:x86_64, :glibc) => ("$bin_prefix/Linux/gmsh-$version-Linux64-sdk.tgz", "ea6a6d36da41b9e777111e055c416ffe994d57c7e3debf174b98e4c09b3b33d7"),
-    Windows(:i686) => ("$bin_prefix/Windows/gmsh-$version-Windows32-sdk.zip", "3dcfd09a8ed676f45a21a19ced7eaa49e30e7d4bc0afa1ebf3a334faf226aa04"),
-    Windows(:x86_64) => ("$bin_prefix/Windows/gmsh-$version-Windows64-sdk.zip", "a140be41eb0cfb2dcf419a9dc623b1c8f54fd35b24c9cf2c0117fe2354c4df17"),
-    MacOS(:x86_64) => ("$bin_prefix/MacOSX/gmsh-$version-MacOSX-sdk.tgz", "29ed2d782f4f62b1f93af37068e7d259843f5a47073c1fcd89a93357d13785d9"),
+    Linux(:i686, :glibc) => ("$bin_prefix/Linux/gmsh-$version-Linux32-sdk.tgz", "703c997f63177a3b15e72dca63d3db46a575d4cb7e41ca860f3d27623b0efed7"),
+    Linux(:x86_64, :glibc) => ("$bin_prefix/Linux/gmsh-$version-Linux64-sdk.tgz", "3cee6e84e6e2f9cfb69b9041d65db58ba0eb4b5aa7e6fcc72fd0485d40e46fe6"),
+    Windows(:i686) => ("$bin_prefix/Windows/gmsh-$version-Windows32-sdk.tgz", "88b6d5d3aa77ee45514731aa8a105a070807a703166f187e41229277fc0c53f4"),
+    Windows(:x86_64) => ("$bin_prefix/Windows/gmsh-$version-Windows64-sdk.tgz", "632f208d00fbb42204358a92f2bc9af1eb38cf98732ff4bbf206f3a6f7193677"),
+    MacOS(:x86_64) => ("$bin_prefix/MacOSX/gmsh-$version-MacOSX-sdk.tgz", "5342ca82a1cae0734fdf189bb98fbc58199ed4e462328b514ad04dbef356b715"),
 )
 
 if any(!satisfied(p; verbose=verbose) for p in products)
