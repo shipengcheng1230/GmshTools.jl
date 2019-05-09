@@ -11,7 +11,7 @@ To read the [Gmsh](http://gmsh.info/) mesh file.
 
 ## Limitations
 
-Due to some failure of building tarballs or write `deps.jl`, the `libgmsh` here does not rely on `build_tarballs` by [BinaryBuilder.jl](https://github.com/JuliaPackaging/BinaryBuilder.jl). Instead, it downloads the Gmsh SDK directly and unpack them (see [build.jl](https://github.com/shipengcheng1230/GmshReader.jl/blob/master/deps/build.jl)).
+Due to some failure of building tarballs or write `deps.jl`, the `libgmsh` here does not rely on `build_tarballs` by [BinaryBuilder.jl](https://github.com/JuliaPackaging/BinaryBuilder.jl). Instead, it downloads the Gmsh SDK directly and unpack them (see [build.jl](https://github.com/shipengcheng1230/GmshTools.jl/blob/master/deps/build.jl)).
 
 ## Utilities
 

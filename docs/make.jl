@@ -5,18 +5,18 @@ end
 
 using Documenter
 using DocumenterMarkdown
-using GmshReader
+using GmshTools
 
 # include("generate.jl")
 
 makedocs(
     doctest=false,
-    modules = [GmshReader],
+    modules = [GmshTools],
     format = Markdown(),
 )
 
 deploydocs(
-  repo = "github.com/shipengcheng1230/GmshReader.jl.git",
+  repo = "github.com/shipengcheng1230/GmshTools.jl.git",
   deps = Deps.pip("pymdown-extensions", "pygments", "mkdocs", "python-markdown-math", "mkdocs-material"),
   target = "site",
   make = () -> run(`mkdocs build`),

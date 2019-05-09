@@ -1,12 +1,12 @@
-site_name:        'GmshReader.jl'
+site_name:        'GmshTools.jl'
 site_description: 'Read Gmsh Mesh File'
 site_author:      'Pengcheng Shi'
-site_url:         'https://github.com/shipengcheng1230/GmshReader.jl'
+site_url:         'https://github.com/shipengcheng1230/GmshTools.jl'
 
-repo_name:        'GmshReader.jl'
-repo_url:         'https://github.com/shipengcheng1230/GmshReader.jl'
+repo_name:        'GmshTools.jl'
+repo_url:         'https://github.com/shipengcheng1230/GmshTools.jl'
 
-copyright: 'Copyright &copy; 2018 - 2019 <a href="https://github.com/shipengcheng1230/GmshReader.jl">Pengcheng Shi</a>'
+copyright: 'Copyright &copy; 2018 - 2019 <a href="https://github.com/shipengcheng1230/GmshTools.jl">Pengcheng Shi</a>'
 
 theme:
   name: 'material'
