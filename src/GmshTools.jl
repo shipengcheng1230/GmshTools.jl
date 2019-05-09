@@ -1,4 +1,4 @@
-module GmshReader
+module GmshTools
 
 using Libdl
 
