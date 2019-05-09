@@ -26,7 +26,7 @@ if any(!satisfied(p; verbose=verbose) for p in products)
         try
             install(url, tarball_hash; prefix=prefix, force=true, verbose=true)
         catch e
-            tarball_path = joinpath(prefix, "download", basename(url))
+            tarball_path = joinpath(prefix, "downloads", basename(url))
             run(pipeline(`unzip $tarball_path -d $(prefix.path)`))
         end
 
