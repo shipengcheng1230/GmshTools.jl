@@ -3,11 +3,20 @@ module GmshReader
 using Libdl
 
 const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib")
+include(joinpath(gmshmodule, "gmsh.jl"))
 
-function __init__()
-    push!(LOAD_PATH, gmshmodule)
+export gmsh, @gmsh_open
+
+macro gmsh_open(name, f)
+    esc(quote
+        try
+            gmsh.initialize()
+            gmsh.open($(name))
+            $(f)
+        finally
+            gmsh.finalize()
+        end
+    end)
 end
-
-include("read_gmsh_ascii.jl")
 
 end
