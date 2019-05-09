@@ -6,7 +6,7 @@ To read the [Gmsh](http://gmsh.info/) mesh file.
 
 ## Install
 ```julia
-(v1.1) pkg> add https://github.com/shipengcheng1230/GmshReader.jl
+(v1.1) pkg> add https://github.com/shipengcheng1230/GmshTools.jl
 ```
 
 ## Limitations

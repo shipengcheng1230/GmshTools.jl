@@ -1,4 +1,4 @@
-# GmshReader.jl
+# GmshTools.jl
 
 [![Build Status](https://travis-ci.com/shipengcheng1230/GmshReader.jl.svg?branch=master)](https://travis-ci.com/shipengcheng1230/GmshReader.jl)
 [![Build status](https://ci.appveyor.com/api/projects/status/0kdir8heqsxu2jif/branch/master?svg=true)](https://ci.appveyor.com/project/shipengcheng1230/gmshreader-jl/branch/master)
@@ -7,4 +7,4 @@
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://shipengcheng1230.github.io/GmshReader.jl/stable/)
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://shipengcheng1230.github.io/GmshReader.jl/latest/)
 
-To read [Gmsh](http://gmsh.info/) mesh file.
+To use [Gmsh](http://gmsh.info/) mesh file.
