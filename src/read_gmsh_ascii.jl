@@ -9,8 +9,8 @@ end
 verify_close_tag(f::IOStream, header::AbstractString) = verify_close_tag(header, readline(f))
 
 function read_msh!(dict::AbstractDict, f::IOStream, ::Val{:MeshFormat})
-    version = map(x->parse(Int, x), readline(f) |> split)
-    @assert version[1] ≥ 4 "Only Support Version 4, got $(version[1])."
+    version = map(x->parse(Float64, x), readline(f) |> split)
+    @assert version[1] ≈ 4.1 "Only Support Version 4.1, got $(version[1])"
     @assert version[2] ≠ 1 "Only Support ASCII, got binary mode."
     verify_close_tag(f, "\$MeshFormat")
     dict["MeshFormat"] = Dict("Format"=>version[1], "Mode"=>version[2], "DataSize"=>version[3])
@@ -42,18 +42,18 @@ end
 
 function read_entities_points(f::IOStream, numPoints::Integer)
     tags, numPhysicals = [Vector{Int}(undef, numPoints) for _ in 1: 2]
-    minx, miny, minz, maxx, maxy, maxz = [Vector{Float64}(undef, numPoints) for _ in 1: 6]
+    x, y, z = [Vector{Float64}(undef, numPoints) for _ in 1: 3]
     physicalTags = Vector{Vector{Int}}(undef, numPoints)
     for i = 1: numPoints
         items = split(readline(f))
-        tags[i], minx[i], miny[i], minz[i], maxx[i], maxy[i], maxz[i], numPhysicals[i], physicalTags[i] =
+        tags[i], x[i], y[i], z[i], numPhysicals[i], physicalTags[i] =
             parse(Int, items[1]),
-            map(x->parse(Float64, x), items[2:7])...,
-            parse(Int, items[8]),
-            map(x->parse(Int, x), items[9:end])
-        @assert length(items) == numPhysicals[i] + 8 "Expected number of line items: $(numPhysicals[i]+8), got $(length(items))"
+            map(x->parse(Float64, x), items[2:4])...,
+            parse(Int, items[5]),
+            map(x->parse(Int, x), items[6:end])
+        @assert length(items) == numPhysicals[i] + 5 "Expected number of line items: $(numPhysicals[i]+5), got $(length(items))"
     end
-    return Dict("tags"=>tags, "minx"=>minx, "miny"=>miny, "minz"=>minz, "maxx"=>maxx, "maxy"=>maxy, "maxz"=>maxz, "numPhysicals"=>numPhysicals, "physicalTags"=>physicalTags)
+    return Dict("tags"=>tags, "x"=>x, "y"=>y, "z"=>z, "numPhysicals"=>numPhysicals, "physicalTags"=>physicalTags)
 end
 
 function read_entities_curves(f::IOStream, numCurves::Integer)
@@ -79,7 +79,7 @@ const read_entities_surfaces = read_entities_curves
 const read_entities_volumes = read_entities_curves
 
 function read_msh!(dict::AbstractDict, f::IOStream, ::Val{:Nodes})
-    numEntityBlocks, numNodes = map(x->parse(Int, x), split(readline(f)))
+    numEntityBlocks, numNodes, minNodeTag, maxNodeTag = map(x->parse(Int, x), split(readline(f)))
     tagEntities, dimEntities, parametrics, tags = [Vector{Int}(undef, numNodes) for _ in 1: 4]
     xs, ys, zs = [Vector{Float64}(undef, numNodes) for _ in 1: 3]
     count = 0

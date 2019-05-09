@@ -2,10 +2,11 @@ module GmshReader
 
 using Libdl
 
-const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib", "gmsh.jl")
-include(gmshmodule)
+const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib")
 
-export gmsh
+function __init__()
+    push!(LOAD_PATH, gmshmodule)
+end
 
 include("read_gmsh_ascii.jl")
 

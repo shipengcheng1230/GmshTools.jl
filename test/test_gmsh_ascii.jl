@@ -13,3 +13,5 @@ SAMPLEDIR = joinpath(@__DIR__, "samples")
         end
     end
 end
+
+read_gmsh_ascii(joinpath(SAMPLEDIR, "t1.msh"))
