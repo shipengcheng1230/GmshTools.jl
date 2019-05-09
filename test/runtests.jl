@@ -1,4 +1,4 @@
-using GmshReader
+using GmshTools
 using Test
 
 demos = ["t1.jl", "t2.jl", "t3.jl", "t4.jl", "t16.jl"]
