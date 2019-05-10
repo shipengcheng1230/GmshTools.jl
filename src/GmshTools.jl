@@ -3,11 +3,7 @@ module GmshTools
 using Libdl
 
 const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib", "gmsh.jl")
-push!(LOAD_PATH, dirname(GmshTools.gmshmodule))
-
-function __init__()
-    @eval Main using gmsh
-end
+Base.include(Main, gmshmodule)
 
 export @gmsh_do, @gmsh_open
 
