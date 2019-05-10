@@ -293,8 +293,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#utilities" title="Utilities" class="md-nav__link">
-    Utilities
+  <a href="#version" title="Version" class="md-nav__link">
+    Version
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
   </a>
   
 </li>
@@ -364,8 +371,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#utilities" title="Utilities" class="md-nav__link">
-    Utilities
+  <a href="#version" title="Version" class="md-nav__link">
+    Version
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
   </a>
   
 </li>
@@ -403,8 +417,21 @@
 <p><a id='Limitations-1'></a></p>
 <h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
 <p>Due to some failure of building tarballs or write <code>deps.jl</code>, the <code>libgmsh</code> here does not rely on <code>build_tarballs</code> by <a href="https://github.com/JuliaPackaging/BinaryBuilder.jl">BinaryBuilder.jl</a>. Instead, it downloads the Gmsh SDK directly and unpack them (see <a href="https://github.com/shipengcheng1230/GmshTools.jl/blob/master/deps/build.jl">build.jl</a>).</p>
-<p><a id='Utilities-1'></a></p>
-<h2 id="utilities">Utilities<a class="headerlink" href="#utilities" title="Permanent link">&para;</a></h2>
+<p><a id='Version-1'></a></p>
+<h2 id="version">Version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h2>
+<p>The current SDK version is 4.3.0. The <em>.msh</em> format is 4.1 (not back-compatible).</p>
+<p><a id='Usage-1'></a></p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">GmshTools</span>
+
+<span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
 <p>The <code>@gmsh_open</code> provide a <em>do-block</em> like use:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
