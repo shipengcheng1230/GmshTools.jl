@@ -1,3 +1,8 @@
+# This file is a direct copy of https://gitlab.onelab.info/gmsh/gmsh/tree/gmsh_4_3_0/demos/api/t1.jl, which
+# is released under GNU General Public License (GPL), Version 2 or later license,
+# with one modification of removing `import gmsh` at the beginning. This file is
+# solely for testing whther or not the building works.
+
 # This file reimplements gmsh/tutorial/t1.geo in Julia.
 
 # For all the elementary explanations about the general philosphy of entities in

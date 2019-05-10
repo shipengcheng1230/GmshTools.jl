@@ -1,3 +1,13 @@
+This package is released under GNU General Public License (GPL) version 3.
+
+This package is build on [Gmsh](http://gmsh.info/), which is
+released under GNU General Public License (GPL), Version 2 or later license. 
+
+Notice that under GmshTools/test, files of "t1.jl", "t2.jl", "t3.jl", "t4.jl" and "t16.jl"
+are modification of examples at https://gitlab.onelab.info/gmsh/gmsh/tree/gmsh_4_3_0/demos/api.
+They are solely for the testing purpose.
+
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
