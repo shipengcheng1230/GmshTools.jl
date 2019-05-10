@@ -1,9 +1,14 @@
 module GmshTools
 
+__precompile__(false)
+
 using Libdl
 
 const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib", "gmsh.jl")
 Base.include(Main, gmshmodule)
+
+function __init__()
+end
 
 export @gmsh_do, @gmsh_open
 
