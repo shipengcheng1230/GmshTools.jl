@@ -272,13 +272,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#install" title="Install" class="md-nav__link">
     Install
   </a>
@@ -350,13 +343,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#install" title="Install" class="md-nav__link">
     Install
   </a>
@@ -405,37 +391,41 @@
                 
                 <p><a id='GmshTools.jl-1'></a></p>
 <h1 id="gmshtoolsjl">GmshTools.jl<a class="headerlink" href="#gmshtoolsjl" title="Permanent link">&para;</a></h1>
-<p><a id='Introduction-1'></a></p>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>To read the <a href="http://gmsh.info/">Gmsh</a> mesh file.</p>
 <p><a id='Install-1'></a></p>
 <h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span> <span class="n">pkg</span><span class="o">&gt;</span> <span class="n">add</span> <span class="n">https</span><span class="o">://</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">shipengcheng1230</span><span class="o">/</span><span class="n">GmshTools</span><span class="o">.</span><span class="n">jl</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span> <span class="n">pkg</span><span class="o">&gt;</span> <span class="n">add</span> <span class="n">GmshTools</span>
 </pre></div>
 </td></tr></table>
 
 <p><a id='Limitations-1'></a></p>
 <h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
-<p>Due to some failure of building tarballs or write <code>deps.jl</code>, the <code>libgmsh</code> here does not rely on <code>build_tarballs</code> by <a href="https://github.com/JuliaPackaging/BinaryBuilder.jl">BinaryBuilder.jl</a>. Instead, it downloads the Gmsh SDK directly and unpack them (see <a href="https://github.com/shipengcheng1230/GmshTools.jl/blob/master/deps/build.jl">build.jl</a>).</p>
+<p>Due to some failure of building tarballs or writing <code>deps.jl</code>, the <code>libgmsh</code> here does not rely on <code>build_tarballs</code> by <a href="https://github.com/JuliaPackaging/BinaryBuilder.jl">BinaryBuilder.jl</a>. Instead, it downloads the Gmsh SDK directly and unpack them (see <a href="https://github.com/shipengcheng1230/GmshTools.jl/blob/master/deps/build.jl">build.jl</a>). The module <code>gmsh.jl</code> is then loaded into <code>Main</code> to avoid segment fault on Linux (no problem on MacOS or Windows).</p>
 <p><a id='Version-1'></a></p>
 <h2 id="version">Version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h2>
 <p>The current SDK version is 4.3.0. The <em>.msh</em> format is 4.1 (not back-compatible).</p>
 <p><a id='Usage-1'></a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">GmshTools</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">GmshTools</span>
 
 <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
-</pre></div>
-</td></tr></table>
 
-<p>The <code>@gmsh_open</code> provide a <em>do-block</em> like use:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nd">@gmsh_open</span> <span class="n">msh_file</span> <span class="k">begin</span>
+<span class="nd">@gmsh</span> <span class="k">begin</span>
+    <span class="o">...</span> <span class="c"># automatically handle initialize and finalize</span>
+<span class="k">end</span>
+
+<span class="nd">@gmsh_open</span> <span class="n">msh_file</span> <span class="k">begin</span>
     <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">getDimension</span><span class="p">()</span>
 <span class="k">end</span>
 </pre></div>
