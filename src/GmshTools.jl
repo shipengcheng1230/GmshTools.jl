@@ -1,11 +1,13 @@
 module GmshTools
 
 using Libdl
-using Reexport
 
 const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib", "gmsh.jl")
-include(joinpath(gmshmodule))
-@reexport using .gmsh
+
+function __init__()
+    push!(LOAD_PATH, dirname(GmshTools.gmshmodule))
+    @eval Main using gmsh
+end
 
 export @gmsh_do, @gmsh_open
 
