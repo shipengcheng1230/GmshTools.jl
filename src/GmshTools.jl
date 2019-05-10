@@ -1,13 +1,11 @@
 module GmshTools
 
-__precompile__(false)
-
 using Libdl
 
 const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib", "gmsh.jl")
+push!(LOAD_PATH, dirname(GmshTools.gmshmodule))
 
 function __init__()
-    push!(LOAD_PATH, dirname(GmshTools.gmshmodule))
     @eval Main using gmsh
 end
 
