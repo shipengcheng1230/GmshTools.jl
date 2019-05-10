@@ -5,8 +5,11 @@ using Libdl
 const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib", "gmsh.jl")
 include(joinpath(gmshmodule))
 
+function __init__()
+    using gmsh
+end
+
 export @gmsh_open
-@static Sys.islinux() || export gmsh
 
 macro gmsh_open(name, f)
     esc(quote

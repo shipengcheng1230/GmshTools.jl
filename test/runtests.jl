@@ -1,8 +1,6 @@
 using GmshTools
 using Test
 
-@static Sys.islinux() && include(GmshTools.gmshmodule)
-
 demos = ["t1.jl", "t2.jl", "t3.jl", "t4.jl", "t16.jl"]
 
 sample_dir = joinpath(@__DIR__, "samples")
