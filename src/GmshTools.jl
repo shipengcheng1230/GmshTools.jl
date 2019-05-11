@@ -4,9 +4,14 @@ using Libdl
 
 const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib", "gmsh.jl")
 
+@static !Sys.islinux() && begin
+    include(gmshmodule)
+    export gmsh
+end
+
 function __init__()
-    # for v4.3.0, on linux, segment fault will occur if module `gmsh` isn't loaded in `Main`
-    Base.include(Main, gmshmodule)
+    # workround for v4.3.0 on Linux
+    @static Sys.islinux() && Base.include(Main, gmshmodule)
 end
 
 export @gmsh_do, @gmsh_open
@@ -33,5 +38,7 @@ macro gmsh_open(name, f)
         end
     end)
 end
+
+include("transfinite_mesh.jl")
 
 end
