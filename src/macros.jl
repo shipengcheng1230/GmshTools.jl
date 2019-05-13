@@ -1,4 +1,4 @@
-export @fun_args, @match_tuple
+export @fun_args, match_tuple
 export @addpoints, @addlines
 
 "To match the tuple expression inside `begin` block and discard the rest."
@@ -14,10 +14,16 @@ macro fun_args(f, expr)
     Expr(:block, ((esc(ex) for ex in exs)...))
 end
 
-macro addpoints(expr)
-    esc(:(@fun_args gmsh.model.geo.addPoint $(expr)))
-end
+const GmshModelGeoOps = Dict(
+    :addPoint => :(gmsh.model.geo.addPoint),
+    :addLine => :(gmsh.model.geo.addLine),
+)
 
-macro addlines(expr)
-    esc(:(@fun_args gmsh.model.geo.addLine $(expr)))
+for (k, v) in GmshModelGeoOps
+    @eval begin
+        export $(Symbol("@" * String(k)))
+        macro $(k)(expr)
+            esc(:(@fun_args($$(QuoteNode(v)), $(expr))))
+        end
+    end
 end

@@ -5,14 +5,14 @@ using Test
     nx, ny = 10, 7
     coefx, coefy = 1.2, 1.2
     @gmsh_do begin
-        @addpoints begin
+        @addPoint begin
             -1.0, -1.0, 0.0, 1
             1.0, -1.0, 0.0, 2
             1.0, 1.0, 0.0, 3
             -1.0, 1.0, 0.0, 4
         end
 
-        @addlines begin
+        @addLine begin
             1, 2
             2, 3
             4, 3
