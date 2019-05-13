@@ -10,4 +10,4 @@ finally
     gmsh.finalize()
 end
 
-include("test_transfinite_mesh.jl")
+include("test_mesh.jl")
