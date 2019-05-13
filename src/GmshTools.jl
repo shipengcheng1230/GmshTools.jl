@@ -42,6 +42,5 @@ macro gmsh_open(name, f)
 end
 
 include("macros.jl")
-include("transfinite_mesh.jl")
 
 end
