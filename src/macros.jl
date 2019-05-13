@@ -1,5 +1,4 @@
 export @fun_args, match_tuple
-export @addpoints, @addlines
 
 "To match the tuple expression inside `begin` block and discard the rest."
 match_tuple = @λ begin
@@ -17,6 +16,7 @@ end
 const GmshModelGeoOps = Dict(
     :addPoint => :(gmsh.model.geo.addPoint),
     :addLine => :(gmsh.model.geo.addLine),
+    :setTransfiniteCurve => :(gmsh.model.geo.mesh.setTransfiniteCurve),
 )
 
 for (k, v) in GmshModelGeoOps

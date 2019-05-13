@@ -11,26 +11,23 @@ using Test
             1.0, 1.0, 0.0, 3
             -1.0, 1.0, 0.0, 4
         end
-
         @addLine begin
             1, 2
             2, 3
             4, 3
             1, 4
         end
-
-        factory = gmsh.model.geo
-        factory.addCurveLoop([1, 2, -3, -4], 1)
-        factory.addPlaneSurface([1], 1)
-
-        factory.mesh.setTransfiniteSurface(1, "Left", [1, 2, 3, 4])
-        factory.mesh.setTransfiniteCurve(1, nx+1, "Progression", coefx)
-        factory.mesh.setTransfiniteCurve(3, nx+1, "Progression", coefx)
-        factory.mesh.setTransfiniteCurve(2, ny+1, "Progression", coefy)
-        factory.mesh.setTransfiniteCurve(4, ny+1, "Progression", coefy)
-        factory.mesh.setRecombine(2, 1)
-
-        factory.synchronize()
+        gmsh.model.geo.addCurveLoop([1, 2, -3, -4], 1)
+        gmsh.model.geo.addPlaneSurface([1], 1)
+        gmsh.model.geo.mesh.setTransfiniteSurface(1, "Left", [1, 2, 3, 4])
+        @setTransfiniteCurve begin
+            1, nx+1, "Progression", coefx
+            3, nx+1, "Progression", coefx
+            2, ny+1, "Progression", coefy
+            4, ny+1, "Progression", coefy
+        end
+        gmsh.model.geo.mesh.setRecombine(2, 1)
+        gmsh.model.geo.synchronize()
         gmsh.model.mesh.generate(2)
         gmsh.write(fname)
     end
