@@ -13,7 +13,6 @@ end
 function __init__()
     # workround for v4.3.0 on Linux
     @static Sys.islinux() && Base.include(Main, gmshmodule)
-    factory = gmsh.model.geo
 end
 
 export @gmsh_do, @gmsh_open
