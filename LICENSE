@@ -1,7 +1,8 @@
-The following copyright license solely applies on GmshTools.jl code. 
-Building this package will produce codes under GNU General Public License (GPL),
-Version 2 or later license. Please see http://gmsh.info/ for Gmsh 
-copyright and licensing information.
+GmshTools.jl is licensed under MIT License.
+
+Building this package will produce codes licensed under
+GNU General Public License (GPL), Version 2 or later license.
+Please see http://gmsh.info/ for Gmsh copyright and licensing information.
 
 MIT License
 
