@@ -12,7 +12,10 @@ end
 
 function __init__()
     # workround for v4.3.0 on Linux
-    @static Sys.islinux() && Base.include(Main, gmshmodule)
+    @static if Sys.islinux()
+        Base.include(Main, gmshmodule)
+        gmsh = Main.gmsh
+    end
 end
 
 export @gmsh_do, @gmsh_open
