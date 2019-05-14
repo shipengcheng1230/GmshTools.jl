@@ -18,26 +18,26 @@ end
 export @gmsh_do, @gmsh_open
 
 macro gmsh_do(f)
-    esc(quote
+    quote
         try
             gmsh.initialize()
-            $(f)
+            $(esc(f))
         finally
             gmsh.finalize()
         end
-    end)
+    end
 end
 
 macro gmsh_open(name, f)
-    esc(quote
+    quote
         try
             gmsh.initialize()
-            gmsh.open($(name))
-            $(f)
+            gmsh.open($(esc(name)))
+            $(esc(f))
         finally
             gmsh.finalize()
         end
-    end)
+    end
 end
 
 include("macros.jl")
