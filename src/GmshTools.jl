@@ -12,35 +12,32 @@ end
 
 function __init__()
     # workround for v4.3.0 on Linux
-    @static if Sys.islinux()
-        Base.include(Main, gmshmodule)
-        gmsh = Main.gmsh
-    end
+    @static Sys.islinux() && Base.include(Main, gmshmodule)
 end
 
 export @gmsh_do, @gmsh_open
 
 macro gmsh_do(f)
-    quote
+    esc(quote
         try
             gmsh.initialize()
-            $(esc(f))
+            $(f)
         finally
             gmsh.finalize()
         end
-    end
+    end)
 end
 
 macro gmsh_open(name, f)
-    quote
+    esc(quote
         try
             gmsh.initialize()
-            gmsh.open($(esc(name)))
-            $(esc(f))
+            gmsh.open($(name))
+            $(f)
         finally
             gmsh.finalize()
         end
-    end
+    end)
 end
 
 include("macros.jl")
