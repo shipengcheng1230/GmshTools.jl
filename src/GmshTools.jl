@@ -11,7 +11,7 @@ const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib", "gmsh.jl")
 end
 
 function __init__()
-    # workround for v4.3.0 on Linux
+    # workround for Gmsh SDK v4.3.0 on Linux otherwise segment fault
     @static Sys.islinux() && Base.include(Main, gmshmodule)
 end
 
