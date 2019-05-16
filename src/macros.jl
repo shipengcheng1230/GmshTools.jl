@@ -29,25 +29,25 @@ for (k, v) in GmshModelGeoOps
     end
 end
 
-@generated function parse_field_arg(tag::Integer, option::String, val::Number)
+function parse_field_arg(tag::Integer, option::String, val::Number)
     :(gmsh.model.mesh.field.setNumber(tag, option, val))
 end
 
-@generated function parse_field_arg(tag::Integer, option::String, val::AbstractVector)
+function parse_field_arg(tag::Integer, option::String, val::AbstractVector)
     :(gmsh.model.mesh.field.setNumbers(tag, option, val))
 end
 
-@generated function parse_field_arg(tag::Integer, option::String, val::AbstractString)
+function parse_field_arg(tag::Integer, option::String, val::AbstractString)
     :(gmsh.model.mesh.field.setString(tag, option, val))
 end
 
 "To add gmsh.model.mesh.field."
 macro addField(tag, name, expr)
     args = filter(!isnothing, map(match_tuple, expr.args))
-    exs = [:(GmshTools.parse_field_arg($(tag), $(arg.args...))) for arg in args]
-    # this `esc` whole thing again deals with Linux `Main.gmsh`
-    esc(quote
-        gmsh.model.mesh.field.add($(name), $(tag))
+    exs = [:(parse_field_arg($(esc(tag)), $(map(esc, arg.args)...))) for arg in args]
+    ex1 = esc(:(gmsh.model.mesh.field.add($(name), $(tag))))
+    quote
+        $(ex1)
         $(Expr(:block, (ex for ex in exs)...))
-    end)
+    end
 end
