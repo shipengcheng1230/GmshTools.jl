@@ -1,4 +1,5 @@
 export @fun_args, match_tuple
+export @addField
 
 "To match the tuple expression inside `begin` block and discard the rest."
 match_tuple = @λ begin
@@ -8,9 +9,9 @@ end
 
 "To call the tuple args by `f`."
 macro fun_args(f, expr)
-    args = filter!(!isnothing, map(match_tuple, expr.args))
+    args = filter(!isnothing, map(match_tuple, expr.args))
     exs = [:($(f)($(arg.args...))) for arg in args]
-    Expr(:block, ((esc(ex) for ex in exs)...))
+    Expr(:block, (esc(ex) for ex in exs)...)
 end
 
 const GmshModelGeoOps = Dict(
@@ -25,5 +26,29 @@ for (k, v) in GmshModelGeoOps
         macro $(k)(expr)
             esc(:(@fun_args($$(QuoteNode(v)), $(expr))))
         end
+    end
+end
+
+@generated function parse_field_arg(tag::Integer, option::String, val::Number)
+    :(gmsh.model.mesh.field.setNumber(tag, option, val))
+end
+
+@generated function parse_field_arg(tag::Integer, option::String, val::AbstractVector)
+    :(gmsh.model.mesh.field.setNumbers(tag, option, val))
+end
+
+@generated function parse_field_arg(tag::Integer, option::String, val::AbstractString)
+    :(gmsh.model.mesh.field.setString(tag, option, val))
+end
+
+"To add gmsh.model.mesh.field."
+macro addField(tag, name, expr)
+    args = filter(!isnothing, map(match_tuple, expr.args))
+    # not `esc` function `parse_field_arg`
+    exs = [:(parse_field_arg($(esc(tag)), $(map(esc, arg.args)...))) for arg in args]
+    exx = Expr(:block, (ex for ex in exs)...)
+    quote
+        gmsh.model.mesh.field.add($(esc(name)), $(esc(tag)))
+        $(exx)
     end
 end
