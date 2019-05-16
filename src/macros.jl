@@ -44,11 +44,12 @@ end
 "To add gmsh.model.mesh.field."
 macro addField(tag, name, expr)
     args = filter(!isnothing, map(match_tuple, expr.args))
-    # not `esc` function `parse_field_arg`
+    # do not `esc` function `parse_field_arg`
     exs = [:(parse_field_arg($(esc(tag)), $(map(esc, arg.args)...))) for arg in args]
     exx = Expr(:block, (ex for ex in exs)...)
+    ex1 = esc(:(gmsh.model.mesh.field.add($(name), $(tag))))
     quote
-        gmsh.model.mesh.field.add($(esc(name)), $(esc(tag)))
+        $(ex1)
         $(exx)
     end
 end
