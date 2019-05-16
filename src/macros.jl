@@ -24,6 +24,7 @@ for (k, v) in GmshModelGeoOps
     @eval begin
         export $(Symbol("@" * String(k)))
         macro $(k)(expr)
+            # https://github.com/JuliaLang/julia/issues/23221
             esc(:(@fun_args($$(QuoteNode(v)), $(expr))))
         end
     end
