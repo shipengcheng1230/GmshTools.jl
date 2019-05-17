@@ -42,7 +42,7 @@ function parse_field_arg(tag::Integer, option::String, val::AbstractString)
     gmsh.model.mesh.field.setString(tag, option, val)
 end
 
-"To add gmsh.model.mesh.field."
+"To add `gmsh.model.mesh.field`."
 macro addField(tag, name, expr)
     args = filter(!isnothing, map(match_tuple, expr.args))
     exs = [:(parse_field_arg($(esc(tag)), $(map(esc, arg.args)...))) for arg in args]
@@ -65,6 +65,7 @@ function parse_option_arg(name::String, r::I, g::I, b::I, a::I) where I<:Integer
     gmsh.option.setColor(name, r, g, b, a)
 end
 
+"To add `gmsh.option`."
 macro addOption(expr)
     args = filter(!isnothing, map(match_tuple, expr.args))
     exs = [:(parse_option_arg($(map(esc, arg.args)...))) for arg in args]
