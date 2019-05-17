@@ -22,8 +22,8 @@ using GmshTools
 gmsh.initialize()
 gmsh.finalize()
 
-@gmsh begin
-    ... # automatically handle initialize and finalize
+@gmsh_do begin
+    # automatically handle initialize and finalize
 end
 
 @gmsh_open msh_file begin
@@ -63,6 +63,7 @@ end
         # more name value pair
     end
 
+    # more gmsh APIs ...
 end
 ```
 
