@@ -1,5 +1,5 @@
-export @fun_args, match_tuple
-export @addField
+export match_tuple
+export @addField, @addOption
 
 "To match the tuple expression inside `begin` block and discard the rest."
 match_tuple = @λ begin
@@ -8,7 +8,7 @@ match_tuple = @λ begin
 end
 
 "To call the tuple args by `f`."
-macro fun_args(f, expr)
+macro fun_call_tuple(f, expr)
     args = filter(!isnothing, map(match_tuple, expr.args))
     exs = [:($(f)($(arg.args...))) for arg in args]
     Expr(:block, (esc(ex) for ex in exs)...)
@@ -25,21 +25,21 @@ for (k, v) in GmshModelGeoOps
         export $(Symbol("@" * String(k)))
         macro $(k)(expr)
             # https://github.com/JuliaLang/julia/issues/23221
-            esc(:(@fun_args($$(QuoteNode(v)), $(expr))))
+            esc(:(GmshTools.@fun_call_tuple($$(QuoteNode(v)), $(expr))))
         end
     end
 end
 
 function parse_field_arg(tag::Integer, option::String, val::Number)
-    :(gmsh.model.mesh.field.setNumber(tag, option, val))
+    gmsh.model.mesh.field.setNumber(tag, option, val)
 end
 
 function parse_field_arg(tag::Integer, option::String, val::AbstractVector)
-    :(gmsh.model.mesh.field.setNumbers(tag, option, val))
+    gmsh.model.mesh.field.setNumbers(tag, option, val)
 end
 
 function parse_field_arg(tag::Integer, option::String, val::AbstractString)
-    :(gmsh.model.mesh.field.setString(tag, option, val))
+    gmsh.model.mesh.field.setString(tag, option, val)
 end
 
 "To add gmsh.model.mesh.field."
@@ -51,4 +51,22 @@ macro addField(tag, name, expr)
         $(ex1)
         $(Expr(:block, (ex for ex in exs)...))
     end
+end
+
+function parse_option_arg(name::String, val::AbstractString)
+    gmsh.option.setString(name, val)
+end
+
+function parse_option_arg(name::String, val::Number)
+    gmsh.option.setNumber(name, val)
+end
+
+function parse_option_arg(name::String, r::I, g::I, b::I, a::I) where I<:Integer
+    gmsh.option.setColor(name, r, g, b, a)
+end
+
+macro addOption(expr)
+    args = filter(!isnothing, map(match_tuple, expr.args))
+    exs = [:(parse_option_arg($(map(esc, arg.args)...))) for arg in args]
+    Expr(:block, (ex for ex in exs)...)
 end

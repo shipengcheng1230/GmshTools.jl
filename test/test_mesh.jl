@@ -56,7 +56,7 @@ end
             3, 4, 3
             4, 1, 4
         end
-        factory.addCurveLoop([1,2,3,4], 1)
+        factory.addCurveLoop([1, 2, 3, 4], 1)
         factory.addPlaneSurface([1], 1)
         @addField 1 "Distance" begin
             "EdgesList", [2]
@@ -93,4 +93,39 @@ end
     @test els[1][1] == 2 # 3-node triangle
     @test !isempty(els[2][1])
     rm(fname)
+end
+
+@testset "option of terminal output" begin
+    _stdout = stdout
+    rd, wr = redirect_stdout()
+    @gmsh_do begin
+        factory = gmsh.model.geo
+        # gmsh.option.setNumber("General.Terminal", 1)
+        @addOption begin
+            "General.Terminal", 1
+        end
+
+        @addPoint begin
+            0.0, 0.0, 0.0, 0.1, 1
+            0.0, 1.0, 0.0, 0.3, 2
+            1.0, 1.0, 0.0, 0.2, 3
+            1.0, 0.0, 0.0, 0.4, 4
+        end
+        @addLine begin
+            1, 2, 1
+            2, 3, 2
+            3, 4, 3
+            4, 1, 4
+        end
+        factory.addCurveLoop([1, 2, 3, 4], 1)
+        factory.addPlaneSurface([1], 1)
+        gmsh.model.geo.synchronize()
+        gmsh.model.mesh.generate(2)
+        gmsh.write("temp.msh")
+    end
+    redirect_stdout(_stdout)
+    close(wr)
+    output = read(rd, String)
+    close(rd)
+    @test startswith(output, "Info")
 end
