@@ -24,7 +24,7 @@ for (k, v) in GmshModelGeoOps
     @eval begin
         export $(Symbol("@" * String(k)))
         macro $(k)(expr)
-            # https://github.com/JuliaLang/julia/issues/23221
+            # nested escape, maybe related to: https://github.com/JuliaLang/julia/issues/23221
             esc(:(GmshTools.@fun_call_tuple($$(QuoteNode(v)), $(expr))))
         end
     end
@@ -46,7 +46,7 @@ end
 macro addField(tag, name, expr)
     args = filter(!isnothing, map(match_tuple, expr.args))
     exs = [:(parse_field_arg($(esc(tag)), $(map(esc, arg.args)...))) for arg in args]
-    ex1 = esc(:(gmsh.model.mesh.field.add($(name), $(tag))))
+    ex1 = :(gmsh.model.mesh.field.add($(esc(name)), $(esc(tag))))
     quote
         $(ex1)
         $(Expr(:block, (ex for ex in exs)...))
