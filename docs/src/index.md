@@ -28,7 +28,7 @@ end
 
 @gmsh_open msh_file begin
     gmsh.model.getDimension()
-    # any gmsh API here
+    # any gmsh API here ...
 end
 
 @gmsh_do begin
@@ -36,31 +36,32 @@ end
     @addPoint begin
         x1, y1, z1, mesh_size_1, point_tag_1
         x2, y2, z2, mesh_size_2, point_tag_2
-        # more points ...
+        ...
     end
 
     @addLine begin
         point_tag_1, point_tag_2, line_tag_1
         point_tag_2, point_tag_3, line_tag_2
-        # more points connection ...
+        ...
     end
 
     @setTransfiniteCurve begin
         line_tag_1, num_points_1, Algorithm_1, coefficient_1
         line_tag_2, num_points_2, Algorithm_2, coefficient_2
-        # more transfinite curve settings ...
+        ...
     end
 
     @addField FieldTag FieldName begin
         name_1, value_1
         name_2, value_2
-        # more name value pair
+        ...
+        # all added to `FieldTag` field
     end
 
     @addOption begin
         name_1, value_1
         name_2, value_2
-        # more name value pair
+        ...
     end
 
     # more gmsh APIs ...
