@@ -53,17 +53,18 @@ macro addField(tag, name, expr)
     end
 end
 
-function parse_option_arg(name::String, val::AbstractString)
+function parse_option_arg(name, val::AbstractString)
     gmsh.option.setString(name, val)
 end
 
-function parse_option_arg(name::String, val::Number)
+function parse_option_arg(name, val::Number)
     gmsh.option.setNumber(name, val)
 end
 
-function parse_option_arg(name::String, r::I, g::I, b::I, a::I) where I<:Integer
-    gmsh.option.setColor(name, r, g, b, a)
-end
+# not available for v4.3.0
+# function parse_option_arg(name, r::I, g::I, b::I, a::I=0) where I<:Integer
+#     gmsh.option.setColor(name, r, g, b, a)
+# end
 
 "To add `gmsh.option`."
 macro addOption(expr)

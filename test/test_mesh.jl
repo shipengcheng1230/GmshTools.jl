@@ -102,6 +102,8 @@ end
         factory = gmsh.model.geo
         @addOption begin
             "General.Terminal", 1
+            "Mesh.CharacteristicLengthMax", 0.4
+            "Mesh.CharacteristicLengthMin", 0.1
         end
 
         @addPoint begin
