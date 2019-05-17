@@ -61,7 +61,8 @@
 45
 46
 47
-48</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">GmshTools</span>
+48
+49</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">GmshTools</span>
 
 <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
@@ -72,7 +73,7 @@
 
 <span class="nd">@gmsh_open</span> <span class="n">msh_file</span> <span class="k">begin</span>
     <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">getDimension</span><span class="p">()</span>
-    <span class="c"># any gmsh API here</span>
+    <span class="c"># any gmsh API here ...</span>
 <span class="k">end</span>
 
 <span class="nd">@gmsh_do</span> <span class="k">begin</span>
@@ -80,31 +81,32 @@
     <span class="nd">@addPoint</span> <span class="k">begin</span>
         <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">mesh_size_1</span><span class="p">,</span> <span class="n">point_tag_1</span>
         <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">z2</span><span class="p">,</span> <span class="n">mesh_size_2</span><span class="p">,</span> <span class="n">point_tag_2</span>
-        <span class="c"># more points ...</span>
+        <span class="o">...</span>
     <span class="k">end</span>
 
     <span class="nd">@addLine</span> <span class="k">begin</span>
         <span class="n">point_tag_1</span><span class="p">,</span> <span class="n">point_tag_2</span><span class="p">,</span> <span class="n">line_tag_1</span>
         <span class="n">point_tag_2</span><span class="p">,</span> <span class="n">point_tag_3</span><span class="p">,</span> <span class="n">line_tag_2</span>
-        <span class="c"># more points connection ...</span>
+        <span class="o">...</span>
     <span class="k">end</span>
 
     <span class="nd">@setTransfiniteCurve</span> <span class="k">begin</span>
         <span class="n">line_tag_1</span><span class="p">,</span> <span class="n">num_points_1</span><span class="p">,</span> <span class="n">Algorithm_1</span><span class="p">,</span> <span class="n">coefficient_1</span>
         <span class="n">line_tag_2</span><span class="p">,</span> <span class="n">num_points_2</span><span class="p">,</span> <span class="n">Algorithm_2</span><span class="p">,</span> <span class="n">coefficient_2</span>
-        <span class="c"># more transfinite curve settings ...</span>
+        <span class="o">...</span>
     <span class="k">end</span>
 
     <span class="nd">@addField</span> <span class="n">FieldTag</span> <span class="n">FieldName</span> <span class="k">begin</span>
         <span class="n">name_1</span><span class="p">,</span> <span class="n">value_1</span>
         <span class="n">name_2</span><span class="p">,</span> <span class="n">value_2</span>
-        <span class="c"># more name value pair</span>
+        <span class="o">...</span>
+        <span class="c"># all added to `FieldTag` field</span>
     <span class="k">end</span>
 
     <span class="nd">@addOption</span> <span class="k">begin</span>
         <span class="n">name_1</span><span class="p">,</span> <span class="n">value_1</span>
         <span class="n">name_2</span><span class="p">,</span> <span class="n">value_2</span>
-        <span class="c"># more name value pair</span>
+        <span class="o">...</span>
     <span class="k">end</span>
 
     <span class="c"># more gmsh APIs ...</span>
