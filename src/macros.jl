@@ -30,16 +30,16 @@ for (k, v) in GmshModelGeoOps
     end
 end
 
-function parse_field_arg(tag::Integer, option::String, val::Number)
-    gmsh.model.mesh.field.setNumber(tag, option, val)
+@generated function parse_field_arg(tag::Integer, option::String, val::Number)
+    :(gmsh.model.mesh.field.setNumber(tag, option, val))
 end
 
-function parse_field_arg(tag::Integer, option::String, val::AbstractVector)
-    gmsh.model.mesh.field.setNumbers(tag, option, val)
+@generated function parse_field_arg(tag::Integer, option::String, val::AbstractVector)
+    :(gmsh.model.mesh.field.setNumbers(tag, option, val))
 end
 
-function parse_field_arg(tag::Integer, option::String, val::AbstractString)
-    gmsh.model.mesh.field.setString(tag, option, val)
+@generated function parse_field_arg(tag::Integer, option::String, val::AbstractString)
+    :(gmsh.model.mesh.field.setString(tag, option, val))
 end
 
 "To add `gmsh.model.mesh.field`."
@@ -53,15 +53,15 @@ macro addField(tag, name, expr)
     end
 end
 
-function parse_option_arg(name, val::AbstractString)
-    gmsh.option.setString(name, val)
+@generated function parse_option_arg(name, val::AbstractString)
+    :(gmsh.option.setString(name, val))
 end
 
-function parse_option_arg(name, val::Number)
-    gmsh.option.setNumber(name, val)
+@generated function parse_option_arg(name, val::Number)
+    :(gmsh.option.setNumber(name, val))
 end
 
-# not available for v4.3.0
+# not available for v4.3.0, will be on v4.4.0
 # function parse_option_arg(name, r::I, g::I, b::I, a::I=0) where I<:Integer
 #     gmsh.option.setColor(name, r, g, b, a)
 # end
