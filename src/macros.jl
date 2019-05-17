@@ -14,22 +14,6 @@ macro fun_call_tuple(f, expr)
     Expr(:block, (esc(ex) for ex in exs)...)
 end
 
-const GmshModelGeoOps = Dict(
-    :addPoint => :(gmsh.model.geo.addPoint),
-    :addLine => :(gmsh.model.geo.addLine),
-    :setTransfiniteCurve => :(gmsh.model.geo.mesh.setTransfiniteCurve),
-)
-
-for (k, v) in GmshModelGeoOps
-    @eval begin
-        export $(Symbol("@" * String(k)))
-        macro $(k)(expr)
-            # nested escape, maybe related to: https://github.com/JuliaLang/julia/issues/23221
-            esc(:(GmshTools.@fun_call_tuple($$(QuoteNode(v)), $(expr))))
-        end
-    end
-end
-
 @generated function parse_field_arg(tag::Integer, option::String, val::Number)
     :(gmsh.model.mesh.field.setNumber(tag, option, val))
 end
@@ -42,17 +26,6 @@ end
     :(gmsh.model.mesh.field.setString(tag, option, val))
 end
 
-"To add `gmsh.model.mesh.field`."
-macro addField(tag, name, expr)
-    args = filter(!isnothing, map(match_tuple, expr.args))
-    exs = [:(parse_field_arg($(esc(tag)), $(map(esc, arg.args)...))) for arg in args]
-    ex1 = :(gmsh.model.mesh.field.add($(esc(name)), $(esc(tag))))
-    quote
-        $(ex1)
-        $(Expr(:block, (ex for ex in exs)...))
-    end
-end
-
 @generated function parse_option_arg(name, val::AbstractString)
     :(gmsh.option.setString(name, val))
 end
@@ -62,13 +35,34 @@ end
 end
 
 # not available for v4.3.0, will be on v4.4.0
-# function parse_option_arg(name, r::I, g::I, b::I, a::I=0) where I<:Integer
-#     gmsh.option.setColor(name, r, g, b, a)
-# end
+@generated function parse_option_arg(name, r::I, g::I, b::I, a::I=0) where I<:Integer
+    gmsh.option.setColor(name, r, g, b, a)
+end
 
-"To add `gmsh.option`."
-macro addOption(expr)
+const GmshModelGeoOps = Dict(
+    :addPoint => :(gmsh.model.geo.addPoint),
+    :addLine => :(gmsh.model.geo.addLine),
+    :setTransfiniteCurve => :(gmsh.model.geo.mesh.setTransfiniteCurve),
+    :addOption => :(GmshTools.parse_option_arg),
+)
+
+for (k, v) in GmshModelGeoOps
+    @eval begin
+        export $(Symbol("@" * String(k)))
+        macro $(k)(expr)
+            # nested escape, maybe related to: https://github.com/JuliaLang/julia/issues/23221
+            esc(:(GmshTools.@fun_call_tuple($$(QuoteNode(v)), $(expr))))
+        end
+    end
+end
+
+"To add `gmsh.model.mesh.field`."
+macro addField(tag, name, expr)
     args = filter(!isnothing, map(match_tuple, expr.args))
-    exs = [:(parse_option_arg($(map(esc, arg.args)...))) for arg in args]
-    Expr(:block, (ex for ex in exs)...)
+    # reason not calling `fun_call_tuple` is that it adds an additional argument `tag` at start
+    exs = [:(parse_field_arg($(esc(tag)), $(map(esc, arg.args)...))) for arg in args]
+    quote
+        gmsh.model.mesh.field.add($(esc(name)), $(esc(tag)))
+        $(Expr(:block, (ex for ex in exs)...))
+    end
 end

@@ -128,5 +128,5 @@ end
     close(wr)
     output = read(rd, String)
     close(rd)
-    @test !isempty(output)
+    @test occursin("Done meshing", output)
 end
