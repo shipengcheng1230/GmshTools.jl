@@ -51,7 +51,7 @@ end
         # more transfinite curve settings ...
     end
 
-    @addField tag FieldName begin
+    @addField FieldTag FieldName begin
         name_1, value_1
         name_2, value_2
         # more name value pair
