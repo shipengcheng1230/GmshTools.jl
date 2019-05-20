@@ -1,5 +1,5 @@
 export match_tuple
-export @addField, @addOption
+export @addField
 
 "To match the tuple expression inside `begin` block and discard the rest."
 match_tuple = @λ begin
