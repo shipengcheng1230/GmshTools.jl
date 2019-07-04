@@ -12,7 +12,7 @@ Due to some failure of building tarballs and writing `deps.jl`, the `libgmsh` he
 
 ## Version
 
-The current SDK version is 4.3.0. The *.msh* format is 4.1 (not back-compatible).
+The current SDK version is 4.4.0. The *.msh* format is 4.1 (not back-compatible).
 
 ## Basic Usage
 
