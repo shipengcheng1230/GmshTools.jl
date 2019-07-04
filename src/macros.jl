@@ -34,7 +34,6 @@ end
     :(gmsh.option.setNumber(name, val))
 end
 
-# not available for v4.3.0, will be on v4.4.0
 @generated function parse_option_arg(name, r::I, g::I, b::I, a::I=0) where I<:Integer
     gmsh.option.setColor(name, r, g, b, a)
 end
