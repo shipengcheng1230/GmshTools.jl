@@ -53,5 +53,5 @@ else
 end
 
 open(joinpath(@__DIR__, "deps.jl"), "w") do f
-    write(f, "const gmshmodule = \"$(modulepath)\"")
+    write(f, """const gmshmodule = "$(modulepath)" """)
 end
