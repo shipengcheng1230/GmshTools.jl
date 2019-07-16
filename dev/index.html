@@ -264,6 +264,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#use-existed-library" title="Use Existed Library" class="md-nav__link">
+    Use Existed Library
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#limitations" title="Limitations" class="md-nav__link">
     Limitations
   </a>
@@ -335,6 +342,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#use-existed-library" title="Use Existed Library" class="md-nav__link">
+    Use Existed Library
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#limitations" title="Limitations" class="md-nav__link">
     Limitations
   </a>
@@ -382,6 +396,9 @@
 </pre></div>
 </td></tr></table>
 
+<p><a id='Use-Existed-Library-1'></a></p>
+<h2 id="use-existed-library">Use Existed Library<a class="headerlink" href="#use-existed-library" title="Permanent link">&para;</a></h2>
+<p>You may add <code>ENV["GMSH_LIB_PATH"] = /your/gmsh/lib/path/string</code> and then run <code>Pkg.build("GmshTools")</code>.</p>
 <p><a id='Limitations-1'></a></p>
 <h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
 <p>Due to some failure of building tarballs and writing <code>deps.jl</code>, the <code>libgmsh</code> here does not rely on <code>build_tarballs</code> by <a href="https://github.com/JuliaPackaging/BinaryBuilder.jl">BinaryBuilder.jl</a>. Instead, it downloads the Gmsh SDK directly and unpack them (see <a href="https://github.com/shipengcheng1230/GmshTools.jl/blob/master/deps/build.jl">build.jl</a>). The module <code>gmsh.jl</code> is loaded in <code>__init__()</code> to avoid segment fault on Linux (no problem on MacOS or Windows).</p>
