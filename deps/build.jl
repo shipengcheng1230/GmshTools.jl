@@ -16,7 +16,10 @@ download_info = Dict(
     MacOS(:x86_64) => ("$bin_prefix/MacOSX/gmsh-$version-MacOSX-sdk.tgz", "71a1115396e86d97daae3648e2601bf66f4c57f5c3eedbb07c53f76dd2ccb3eb"),
 )
 
-if any(!satisfied(p; verbose=verbose) for p in products)
+if haskey(ENV, "GMSH_LIB_PATH")
+    modulepath = joinpath(ENV["GMSH_LIB_PATH"], "gmsh.jl") |> abspath
+    @assert isfile(modulepath) "No \"gmsh.jl\" found at $(ENV["GMSH_LIB_PATH"])."
+elseif any(!satisfied(p; verbose=verbose) for p in products)
     try
         # Download and install binaries
         url, tarball_hash = choose_download(download_info)
@@ -43,4 +46,9 @@ if any(!satisfied(p; verbose=verbose) for p in products)
         end
     end
     # write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
+    modulepath = joinpath(prefix.path, "lib", "gmsh.jl") |> abspath
+end
+
+open(joinpath(@__DIR__, "deps.jl"), "w") do f
+    write(f, "const gmshmodule = \"$(modulepath)\"")
 end

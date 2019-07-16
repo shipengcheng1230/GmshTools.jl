@@ -6,6 +6,12 @@
 (v1.1) pkg> add GmshTools
 ```
 
+
+## Use Existed Library
+
+You may add `ENV["GMSH_LIB_PATH"] = /your/gmsh/lib/path/string` and then run `Pkg.build("GmshTools")`.
+
+
 ## Limitations
 
 Due to some failure of building tarballs and writing `deps.jl`, the `libgmsh` here does not rely on `build_tarballs` by [BinaryBuilder.jl](https://github.com/JuliaPackaging/BinaryBuilder.jl). Instead, it downloads the Gmsh SDK directly and unpack them (see [build.jl](https://github.com/shipengcheng1230/GmshTools.jl/blob/master/deps/build.jl)). The module `gmsh.jl` is loaded in `__init__()` to avoid segment fault on Linux (no problem on MacOS or Windows).
