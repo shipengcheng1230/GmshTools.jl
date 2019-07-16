@@ -52,6 +52,8 @@ else
     # write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
 end
 
+escape_path = path -> replace(path, "\\" => "\\\\")
+modulepath = escape_path(modulepath)
 open(joinpath(@__DIR__, "deps.jl"), "w") do f
     write(f, """const gmshmodule = "$(modulepath)" """)
 end
