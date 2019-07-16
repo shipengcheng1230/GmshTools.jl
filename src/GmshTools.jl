@@ -2,7 +2,11 @@ module GmshTools
 
 using MLStyle
 
-const gmshmodule = joinpath(@__DIR__, "..", "deps", "usr", "lib", "gmsh.jl")
+const depsjl_path = joinpath(@__DIR__, "..", "deps", "deps.jl")
+if !isfile(depsjl_path)
+    error("libgmsh not installed properly, run Pkg.build(\"GmshTools\"), restart Julia and try again")
+end
+include(depsjl_path)
 
 @static Sys.islinux() || include(gmshmodule)
 
