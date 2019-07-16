@@ -19,34 +19,37 @@ download_info = Dict(
 if haskey(ENV, "GMSH_LIB_PATH")
     modulepath = joinpath(ENV["GMSH_LIB_PATH"], "gmsh.jl") |> abspath
     @assert isfile(modulepath) "No \"gmsh.jl\" found at $(ENV["GMSH_LIB_PATH"])."
-elseif any(!satisfied(p; verbose=verbose) for p in products)
-    try
-        # Download and install binaries
-        url, tarball_hash = choose_download(download_info)
+else
+    modulepath = joinpath(prefix.path, "lib", "gmsh.jl") |> abspath
+    if any(!satisfied(p; verbose=verbose) for p in products)
+        # `satisfied` will cause segment fault on linux if `libgmsh` is pre-existing
         try
-            install(url, tarball_hash; prefix=prefix, force=true, verbose=true)
-        catch e
-            # cannot list content of .zip, manually unzip
-            tarball_path = joinpath(prefix, "downloads", basename(url))
-            run(pipeline(`unzip $tarball_path -d $(prefix.path)`))
-        end
+            # Download and install binaries
+            url, tarball_hash = choose_download(download_info)
+            try
+                install(url, tarball_hash; prefix=prefix, force=true, verbose=true)
+            catch e
+                # cannot list content of .zip, manually unzip
+                tarball_path = joinpath(prefix, "downloads", basename(url))
+                run(pipeline(`unzip $tarball_path -d $(prefix.path)`))
+            end
 
-        # strip the top directory
-        content_path = joinpath(prefix, splitext(basename(url))[1])
-        foreach(
-            (x) -> mv(joinpath(content_path, x), joinpath(prefix, x); force=true),
-            readdir(content_path)
-            )
-        rm(content_path; force=true, recursive=true)
-    catch e
-        if typeof(e) <: ArgumentError
-            error("Your platform $(Sys.MACHINE) is not supported by this package!")
-        else
-            rethrow(e)
+            # strip the top directory
+            content_path = joinpath(prefix, splitext(basename(url))[1])
+            foreach(
+                (x) -> mv(joinpath(content_path, x), joinpath(prefix, x); force=true),
+                readdir(content_path)
+                )
+            rm(content_path; force=true, recursive=true)
+        catch e
+            if typeof(e) <: ArgumentError
+                error("Your platform $(Sys.MACHINE) is not supported by this package!")
+            else
+                rethrow(e)
+            end
         end
     end
     # write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
-    modulepath = joinpath(prefix.path, "lib", "gmsh.jl") |> abspath
 end
 
 open(joinpath(@__DIR__, "deps.jl"), "w") do f
