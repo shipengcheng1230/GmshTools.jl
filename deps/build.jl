@@ -1,7 +1,7 @@
 using BinaryProvider
 
 const verbose = "--verbose" in ARGS
-const prefix = Prefix(get([a for a in ARGS if a != "--verbose"], 1, joinpath(@__DIR__, "usr", "lib")))
+const prefix = Prefix(get([a for a in ARGS if a != "--verbose"], 1, joinpath(@__DIR__, "usr")))
 
 products = Product[
     LibraryProduct(prefix, "libgmsh", :libgmsh),
