@@ -3,9 +3,10 @@ using Libdl
 
 const verbose = "--verbose" in ARGS
 const prefix = Prefix(get([a for a in ARGS if a != "--verbose"], 1, joinpath(@__DIR__, "usr")))
+const libname = Sys.iswindows() ? "gmsh-4.4" : "libgmsh"
 
 products = Product[
-    LibraryProduct(prefix, "libgmsh", :libgmsh),
+    LibraryProduct(prefix, libname, :libgmsh),
 ]
 
 bin_prefix = "http://gmsh.info/bin"
