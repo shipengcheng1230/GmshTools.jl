@@ -1,5 +1,4 @@
 using BinaryProvider
-using Libdl
 
 const verbose = "--verbose" in ARGS
 const prefix = Prefix(get([a for a in ARGS if a != "--verbose"], 1, joinpath(@__DIR__, "usr")))
@@ -25,7 +24,7 @@ if haskey(ENV, "GMSH_LIB_PATH")
 else
     if any(!satisfied(p; verbose=verbose) for p in products)
         try
-            # Download and install binaries
+            # download and install binaries
             url, tarball_hash = choose_download(download_info)
             try
                 install(url, tarball_hash; prefix=prefix, force=true, verbose=true)
@@ -42,8 +41,10 @@ else
                 readdir(content_path)
                 )
             rm(content_path; force=true, recursive=true)
+
+            # BinaryProvider will search $prefix/bin instead of $prefix/lib
             if Sys.iswindows()
-                dir_path = libdir(products[1].prefix, BinaryProvider.platform_key_abi())
+                dir_path = libdir(products[1].prefix, platform_key_abi())
                 lib_path = joinpath(dirname(dir_path), "lib")
                 run(`cp $(lib_path)/* $(dir_path)`)
             end
@@ -55,11 +56,5 @@ else
             end
         end
     end
-    run(`ls $(joinpath(prefix.path, "lib"))`)
-    @show dlopen(joinpath(prefix.path, "lib", libname))
-    @show dir_path = libdir(products[1].prefix, BinaryProvider.platform_key_abi())
-    @show lib_path = joinpath(dirname(dir_path), "lib")
-    @show satisfied(products[1]; verbose=true)
-    @show satisfied(products[1]; verbose=true, isolate=true)
     write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
 end
