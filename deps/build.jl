@@ -20,9 +20,7 @@ download_info = Dict(
 )
 
 if haskey(ENV, "GMSH_LIB_PATH")
-    products = Product[
-        LibraryProduct(ENV["GMSH_LIB_PATH"], "libgmsh", :libgmsh),
-    ]
+    products = Product[LibraryProduct(ENV["GMSH_LIB_PATH"], libname, :libgmsh),]
     write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
 else
     if any(!satisfied(p; verbose=verbose) for p in products)
@@ -44,6 +42,11 @@ else
                 readdir(content_path)
                 )
             rm(content_path; force=true, recursive=true)
+            if Sys.iswindows()
+                dir_path = libdir(products[1].prefix, BinaryProvider.platform_key_abi())
+                lib_path = joinpath(dirname(dir_path), "lib")
+                run(`cp $(lib_path)/* $(dir_path)`)
+            end
         catch e
             if typeof(e) <: ArgumentError
                 error("Your platform $(Sys.MACHINE) is not supported by this package!")
@@ -55,6 +58,7 @@ else
     run(`ls $(joinpath(prefix.path, "lib"))`)
     @show dlopen(joinpath(prefix.path, "lib", libname))
     @show dir_path = libdir(products[1].prefix, BinaryProvider.platform_key_abi())
+    @show lib_path = joinpath(dirname(dir_path), "lib")
     @show satisfied(products[1]; verbose=true)
     @show satisfied(products[1]; verbose=true, isolate=true)
     write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
