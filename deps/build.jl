@@ -1,7 +1,7 @@
 using BinaryProvider
 
 const verbose = "--verbose" in ARGS
-const prefix = Prefix(get([a for a in ARGS if a != "--verbose"], 1, joinpath(@__DIR__, "usr")))
+const prefix = Prefix(get([a for a in ARGS if a != "--verbose"], 1, joinpath(@__DIR__, "usr", "lib")))
 
 products = Product[
     LibraryProduct(prefix, "libgmsh", :libgmsh),
@@ -32,7 +32,7 @@ else
             catch e
                 # cannot list content of .zip, manually unzip
                 tarball_path = joinpath(prefix, "downloads", basename(url))
-                run(pipeline(`unzip $tarball_path -d $(prefix.path)`))
+                run(pipeline(`unzip $(tarball_path) -d $(prefix.path)`))
             end
 
             # strip the top directory
