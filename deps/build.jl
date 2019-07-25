@@ -53,7 +53,7 @@ else
         end
     end
     run(`ls $(joinpath(prefix.path, "lib"))`)
-    @show dlopen(joinpath(prefix.path, "lib", "libgmsh"))
+    @show dlopen(joinpath(prefix.path, "lib", libname))
     @show satisfied(products[1])
     write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
 end
