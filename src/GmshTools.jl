@@ -8,12 +8,11 @@ if !isfile(depsjl_path)
 end
 include(depsjl_path)
 
-@static Sys.islinux() || include(gmshmodule)
+gmshmodule = joinpath(dirname(libgmsh), "gmsh.jl")
+include(gmshmodule)
 
 function __init__()
-    # Tried lots of approaches, this is one of the workrounds for Gmsh SDK v4.3.0 on Linux
-    # otherwise segment fault if you `gmsh.initialize()`
-    @static Sys.islinux() && Base.include(@__MODULE__, gmshmodule)
+    check_deps()
 end
 
 export gmsh, @gmsh_do, @gmsh_open
