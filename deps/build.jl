@@ -1,4 +1,5 @@
 using BinaryProvider
+using Libdl
 
 const verbose = "--verbose" in ARGS
 const prefix = Prefix(get([a for a in ARGS if a != "--verbose"], 1, joinpath(@__DIR__, "usr")))
@@ -32,7 +33,7 @@ else
             catch e
                 # cannot list content of .zip, manually unzip
                 tarball_path = joinpath(prefix, "downloads", basename(url))
-                run(pipeline(`unzip $(tarball_path) -d $(prefix.path)`))
+                run(`unzip $(tarball_path) -d $(prefix.path)`)
             end
 
             # strip the top directory
@@ -50,8 +51,8 @@ else
             end
         end
     end
-    products = Product[
-        LibraryProduct(joinpath(prefix.path, "lib"), "libgmsh", :libgmsh),
-    ]
+    run(`ls $(joinpath(prefix.path, "lib"))`)
+    @show dlopen(joinpath(prefix.path, "lib", "libgmsh"))
+    @show satisfied(products[1])
     write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
 end
