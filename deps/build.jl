@@ -13,7 +13,8 @@ version = "4.4.1"
 
 download_info = Dict(
     # since v4.2.3, Linux SDK will cause segment fault if being `dlopen`
-    Linux(:x86_64, :glibc) => ("$bin_prefix/Linux/gmsh-4.2.2-Linux64-sdk.tgz", "ea6a6d36da41b9e777111e055c416ffe994d57c7e3debf174b98e4c09b3b33d7"),
+    # Linux(:x86_64, :glibc) => ("$bin_prefix/Linux/gmsh-4.2.2-Linux64-sdk.tgz", "ea6a6d36da41b9e777111e055c416ffe994d57c7e3debf174b98e4c09b3b33d7"),
+    Linux(:x86_64, :glibc) => ("$bin_prefix/Linux/gmsh-$version-Linux64-sdk.tgz", "f62ab653c53de2095468267962ef3ac830e366d5f77810a5872a9d0bff8039f1"),
     Windows(:x86_64) => ("$bin_prefix/Windows/gmsh-$version-Windows64-sdk.zip", "094207b56e23e462f2e11ffc2d7006f88c641b62fa9d01522f731dcf00e321a9"),
     MacOS(:x86_64) => ("$bin_prefix/MacOSX/gmsh-$version-MacOSX-sdk.tgz", "40c13c22f0bff840fc827e5f4530668b2818c1472593370ebf302555df498f9e"),
 )
