@@ -271,13 +271,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#limitations" title="Limitations" class="md-nav__link">
-    Limitations
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#version" title="Version" class="md-nav__link">
     Version
   </a>
@@ -349,13 +342,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#limitations" title="Limitations" class="md-nav__link">
-    Limitations
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#version" title="Version" class="md-nav__link">
     Version
   </a>
@@ -392,19 +378,27 @@
 <h1 id="gmshtoolsjl">GmshTools.jl<a class="headerlink" href="#gmshtoolsjl" title="Permanent link">&para;</a></h1>
 <p><a id='Install-1'></a></p>
 <h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span> <span class="n">pkg</span><span class="o">&gt;</span> <span class="n">add</span> <span class="n">GmshTools</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="mi">2</span><span class="p">)</span> <span class="n">pkg</span><span class="o">&gt;</span> <span class="n">add</span> <span class="n">GmshTools</span>
 </pre></div>
 </td></tr></table>
 
 <p><a id='Use-Existed-Library-1'></a></p>
 <h2 id="use-existed-library">Use Existed Library<a class="headerlink" href="#use-existed-library" title="Permanent link">&para;</a></h2>
-<p>You may add <code>ENV["GMSH_LIB_PATH"] = /your/gmsh/lib/path/string</code> and then run <code>Pkg.build("GmshTools")</code>.</p>
-<p><a id='Limitations-1'></a></p>
-<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
-<p>Due to some failure of building tarballs and writing <code>deps.jl</code>, the <code>libgmsh</code> here does not rely on <code>build_tarballs</code> by <a href="https://github.com/JuliaPackaging/BinaryBuilder.jl">BinaryBuilder.jl</a>. Instead, it downloads the Gmsh SDK directly and unpack them (see <a href="https://github.com/shipengcheng1230/GmshTools.jl/blob/master/deps/build.jl">build.jl</a>). The module <code>gmsh.jl</code> is loaded in <code>__init__()</code> to avoid segment fault on Linux (no problem on MacOS or Windows).</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">Pkg</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="nb">ENV</span><span class="p">[</span><span class="s">&quot;GMSH_LIB_PATH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;/opt/gmsh/lib64&quot;</span><span class="p">;</span> <span class="c"># here is your `libgmsh.so` or `gmsh.dll`</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="s">&quot;GmshTools&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
 <p><a id='Version-1'></a></p>
 <h2 id="version">Version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h2>
-<p>The current SDK version is 4.4.0. The <em>.msh</em> format is 4.1 (not back-compatible).</p>
+<p>The current SDK version is 4.4.1. The <em>.msh</em> format is 4.1 (not back-compatible).</p>
 <p><a id='Basic-Usage-1'></a></p>
 <h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
