@@ -3,22 +3,22 @@
 
 ## Install
 ```julia
-(v1.1) pkg> add GmshTools
+(v1.2) pkg> add GmshTools
 ```
-
 
 ## Use Existed Library
 
-You may add `ENV["GMSH_LIB_PATH"] = /your/gmsh/lib/path/string` and then run `Pkg.build("GmshTools")`.
+```julia
+using Pkg
 
+julia> ENV["GMSH_LIB_PATH"] = "/opt/gmsh/lib64"; # here is your `libgmsh.so` or `gmsh.dll`
 
-## Limitations
-
-Due to some failure of building tarballs and writing `deps.jl`, the `libgmsh` here does not rely on `build_tarballs` by [BinaryBuilder.jl](https://github.com/JuliaPackaging/BinaryBuilder.jl). Instead, it downloads the Gmsh SDK directly and unpack them (see [build.jl](https://github.com/shipengcheng1230/GmshTools.jl/blob/master/deps/build.jl)). The module `gmsh.jl` is loaded in `__init__()` to avoid segment fault on Linux (no problem on MacOS or Windows).
+julia> Pkg.build("GmshTools")
+```
 
 ## Version
 
-The current SDK version is 4.4.0. The *.msh* format is 4.1 (not back-compatible).
+The current SDK version is 4.4.1. The *.msh* format is 4.1 (not back-compatible).
 
 ## Basic Usage
 

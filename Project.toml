@@ -1,7 +1,7 @@
 name = "GmshTools"
 uuid = "82e2f556-b1bd-5f1a-9576-f93c0da5f0ee"
 authors = ["Pengcheng Shi"]
-version = "0.2.1"
+version = "0.2.2"
 
 [deps]
 BinaryProvider = "b99e7846-7c00-51b0-8f62-c81ae34c0232"
