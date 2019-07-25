@@ -54,6 +54,7 @@ else
     end
     run(`ls $(joinpath(prefix.path, "lib"))`)
     @show dlopen(joinpath(prefix.path, "lib", libname))
-    @show satisfied(products[1])
+    @show satisfied(products[1]; verbose=true)
+    @show satisfied(products[1]; verbose=true, isolate=true)
     write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
 end
