@@ -46,7 +46,7 @@ else
             if Sys.iswindows()
                 dir_path = libdir(products[1].prefix, platform_key_abi())
                 lib_path = joinpath(dirname(dir_path), "lib")
-                run(`cp $(lib_path)/* $(dir_path)`)
+                run(`cp -L $(lib_path)/* $(dir_path)`)
             end
         catch e
             if typeof(e) <: ArgumentError
