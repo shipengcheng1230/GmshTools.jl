@@ -3,7 +3,7 @@
 
 ## Install
 ```julia
-(v1.2) pkg> add GmshTools
+(v1.3) pkg> add GmshTools
 ```
 
 ## Use Existed Library
@@ -18,7 +18,7 @@ julia> Pkg.build("GmshTools")
 
 ## Version
 
-The current SDK version is 4.4.1. The *.msh* format is 4.1 (not back-compatible).
+The current SDK version is *4.5.0*.
 
 ## Basic Usage
 
