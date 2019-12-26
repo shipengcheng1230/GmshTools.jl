@@ -2,20 +2,19 @@ using BinaryProvider
 
 const verbose = "--verbose" in ARGS
 const prefix = Prefix(get([a for a in ARGS if a != "--verbose"], 1, joinpath(@__DIR__, "usr")))
-const libname = Sys.iswindows() ? "gmsh-4.4" : "libgmsh"
+const libname = Sys.iswindows() ? "gmsh-4.5" : "libgmsh"
 
 products = Product[
     LibraryProduct(prefix, libname, :libgmsh),
 ]
 
 bin_prefix = "http://gmsh.info/bin"
-version = "4.4.1"
+version = "4.5.0"
 
 download_info = Dict(
-    # since v4.2.3, Linux SDK will cause segment fault if being `dlopen`
-    Linux(:x86_64, :glibc) => ("$bin_prefix/Linux/gmsh-4.2.2-Linux64-sdk.tgz", "ea6a6d36da41b9e777111e055c416ffe994d57c7e3debf174b98e4c09b3b33d7"),
-    Windows(:x86_64) => ("$bin_prefix/Windows/gmsh-$version-Windows64-sdk.zip", "094207b56e23e462f2e11ffc2d7006f88c641b62fa9d01522f731dcf00e321a9"),
-    MacOS(:x86_64) => ("$bin_prefix/MacOSX/gmsh-$version-MacOSX-sdk.tgz", "40c13c22f0bff840fc827e5f4530668b2818c1472593370ebf302555df498f9e"),
+    Linux(:x86_64, :glibc) => ("$bin_prefix/Linux/gmsh-$version-Linux64-sdk.tgz", "c9a97a2b7d3eaaf2352466fc1cdc43d1c6885912ade770098b35627e931ccedb"),
+    Windows(:x86_64) => ("$bin_prefix/Windows/gmsh-$version-Windows64-sdk.zip", "e805b85d0be3de55f6e0a94cbfa0135289ff11d169c93e0e19e81d18da87dfd4"),
+    MacOS(:x86_64) => ("$bin_prefix/MacOSX/gmsh-$version-MacOSX-sdk.tgz", "00f31a5f75a180d37e1b8d5343b91b07d7430d0843ca4490db303600c1a386a5"),
 )
 
 if haskey(ENV, "GMSH_LIB_PATH")
