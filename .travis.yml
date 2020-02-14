@@ -6,10 +6,6 @@ os:
 julia:
   - 1.3
   - nightly
-matrix:
-  allow_failures:
-    - julia: nightly
-  fast_finish: true
 notifications:
   email: false
 branches:
@@ -29,6 +25,9 @@ after_success:
   - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
   - julia --project=test/coverage test/coverage/coverage.jl
 jobs:
+  allow_failures:
+    - julia: nightly
+  fast_finish: true
   include:
     - stage: "Documentation"
       julia: 1.3
