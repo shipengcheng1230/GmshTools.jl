@@ -9,12 +9,12 @@ products = Product[
 ]
 
 bin_prefix = "http://gmsh.info/bin"
-version = "4.5.2"
+version = "4.5.3"
 
 download_info = Dict(
-    Linux(:x86_64, :glibc) => ("$bin_prefix/Linux/gmsh-$version-Linux64-sdk.tgz", "27e0e4afe6cc653588ed933bc2152cf33eae453c3594d9340bd37b54b6bab627"),
-    Windows(:x86_64) => ("$bin_prefix/Windows/gmsh-$version-Windows64-sdk.zip", "b61760d0303d7f61962c1be1b46b2c1fb8f0a82132e1b4b8b676499eec4000cc"),
-    MacOS(:x86_64) => ("$bin_prefix/MacOSX/gmsh-$version-MacOSX-sdk.tgz", "f8297c5fc775466e5e1e45db1002ae1a6bc9bd7b51d79132049bcad31f180a60"),
+    Linux(:x86_64, :glibc) => ("$bin_prefix/Linux/gmsh-$version-Linux64-sdk.tgz", "7da6c3821b01e0c6190f1dd0044dce42978a2d58d67c102c7c7507f581a33df7"),
+    Windows(:x86_64) => ("$bin_prefix/Windows/gmsh-$version-Windows64-sdk.zip", "62ea593e9508f752acb660e0144a89ad5639c51da93918c359e62ac64bb2a050"),
+    MacOS(:x86_64) => ("$bin_prefix/MacOSX/gmsh-$version-MacOSX-sdk.tgz", "28eefa7b554077bb4a4631dcdbaea4b5fc94eef7529abf1460ded096699a363f"),
 )
 
 if haskey(ENV, "GMSH_LIB_PATH")
