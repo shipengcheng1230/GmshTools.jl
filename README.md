@@ -15,3 +15,5 @@ To use [Gmsh](http://gmsh.info/) mesh program.
   directory and rebuild this package. This needs only to be done once.
 
 - To come along nicely with Intel MKL, the Julia must be compiled with 32 integer interface, i.e. linking to **lp64** instead of **ipl64**.
+
+- There is an [issue](https://github.com/shipengcheng1230/GmshTools.jl/issues/5) of building on **Windows** for Julia *v1.4.0*. (Currently I don't have a Windows machine to debug.)
