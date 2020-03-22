@@ -18,7 +18,7 @@ julia> Pkg.build("GmshTools")
 
 ## Version
 
-The current SDK version is *4.5.3*.
+The current SDK version is *4.5.5* by 03/21/2020.
 
 ## Basic Usage
 
