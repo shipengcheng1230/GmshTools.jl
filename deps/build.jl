@@ -56,4 +56,6 @@ else
         end
     end
     write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
+    run(`cat deps/deps.jl`)
+    run(`ls deps/usr`)
 end
