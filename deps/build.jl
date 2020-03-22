@@ -56,6 +56,14 @@ else
         end
     end
     write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
-    run(`cat deps/deps.jl`)
-    run(`ls deps/usr`)
+
+
+end
+
+Sys.iswindows() && run(`dir`)
+@show isfile(joinpath(@__DIR__, "deps.jl"))
+using Printf
+open(joinpath(@__DIR__, "deps.jl"), "r") do f
+    s = read(f, String)
+    @printf "%s" s
 end
