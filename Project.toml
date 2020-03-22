@@ -7,11 +7,12 @@ version = "0.3.5"
 BinaryProvider = "b99e7846-7c00-51b0-8f62-c81ae34c0232"
 Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 MLStyle = "d8e11817-5142-5d16-987a-aa16d5891078"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
 [compat]
-julia = "1"
 BinaryProvider = "0.5.8"
 MLStyle = "0.3.1"
+julia = "1"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

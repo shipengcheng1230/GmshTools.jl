@@ -62,7 +62,6 @@ end
 
 Sys.iswindows() && run(`dir`)
 @show isfile(joinpath(@__DIR__, "deps.jl"))
-import Pkg; Pkg.add("Printf")
 using Printf
 open(joinpath(@__DIR__, "deps.jl"), "r") do f
     s = read(f, String)
