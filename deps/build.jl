@@ -21,18 +21,23 @@ if haskey(ENV, "GMSH_LIB_PATH")
     products = Product[LibraryProduct(ENV["GMSH_LIB_PATH"], libname, :libgmsh),]
     write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
 else
+    @info "here1"
     if any(!satisfied(p; verbose=verbose) for p in products)
+        @info "here2"
         try
+            @info "here3"
             # download and install binaries
             url, tarball_hash = choose_download(download_info)
             try
+                @info "here4"
                 install(url, tarball_hash; prefix=prefix, force=true, verbose=true)
             catch e
+                @info "here5"
                 # cannot list content of .zip, manually unzip
                 tarball_path = joinpath(prefix, "downloads", basename(url))
                 run(`unzip $(tarball_path) -d $(prefix.path)`)
             end
-
+            @info "here6"
             # strip the top directory
             content_path = joinpath(prefix, splitext(basename(url))[1])
             foreach(
@@ -43,6 +48,7 @@ else
 
             # BinaryProvider will search $prefix/bin instead of $prefix/lib
             if Sys.iswindows()
+                @info "here7"
                 dir_path = libdir(products[1].prefix, platform_key_abi())
                 lib_path = joinpath(dirname(dir_path), "lib")
                 run(`cp -L $(lib_path)/* $(dir_path)`)
@@ -55,15 +61,20 @@ else
             end
         end
     end
+    @info "here8"
     write_deps_file(joinpath(@__DIR__, "deps.jl"), products)
-
-
 end
 
 Sys.iswindows() && run(`dir`)
-@show isfile(joinpath(@__DIR__, "deps.jl"))
+@info isfile(joinpath(@__DIR__, "deps.jl"))
 using Printf
+@info "Printf deps.jl"
 open(joinpath(@__DIR__, "deps.jl"), "r") do f
+    s = read(f, String)
+    @printf "%s" s
+end
+@info "Print build.log"
+open(joinpath(@__DIR__, "build.log"), "r") do f
     s = read(f, String)
     @printf "%s" s
 end
