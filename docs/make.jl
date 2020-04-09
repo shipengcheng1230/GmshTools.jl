@@ -4,7 +4,7 @@ if Base.HOME_PROJECT[] !== nothing
 end
 
 using Documenter
-using DocumenterMarkdown
+# using DocumenterMarkdown
 using GmshTools
 
 # include("generate.jl")
@@ -12,12 +12,18 @@ using GmshTools
 makedocs(
     doctest=false,
     modules = [GmshTools],
-    format = Markdown(),
+    sitename = "GmshTools",
+    # format = Markdown(),
+    format = Documenter.HTML(prettyurls = get(ENV, "CI", nothing) == "true"),
+    pages = [
+        "Index" => "index.md",
+        "Element Types" => "element_types.md",
+    ],
 )
 
 deploydocs(
   repo = "github.com/shipengcheng1230/GmshTools.jl.git",
-  deps = Deps.pip("pymdown-extensions", "pygments", "mkdocs", "python-markdown-math", "mkdocs-material"),
-  target = "site",
-  make = () -> run(`mkdocs build`),
+  # deps = Deps.pip("pymdown-extensions", "pygments", "mkdocs", "python-markdown-math", "mkdocs-material"),
+  target = "build",
+  # make = () -> run(`mkdocs build`),
 )
