@@ -17,6 +17,7 @@ if libpath === nothing
             check_deps() = nothing
             """
             )
+    end
 else
     # For windows, you must create a link from `gmsh-*.*.dll` to `libgmsh.dll`
     libgmsh = find_library("libgmsh", [libpath])
