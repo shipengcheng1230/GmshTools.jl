@@ -2,21 +2,16 @@ module GmshTools
 
 using MLStyle
 
-const depsjl_path = joinpath(@__DIR__, "..", "deps", "deps.jl")
+const depsfile = joinpath(@__DIR__, "..", "deps", "deps.jl")
+if isfile(depsfile)
+    include(depsfile)
+else
+    error("GmshTools is not properly installed. Please run Pkg.build(\"GmshTools\") ",
+          "and restart Julia.")
+end
 
 function __init__()
-    try
-        include(depsjl_path)
-        gmshmodule = joinpath(dirname(libgmsh), "gmsh.jl")
-        include(gmshmodule)
-        Base.invokelatest(check_deps) # world age problem
-    catch ex
-        if isa(ex, ErrorException)
-            @error "libgmsh not installed properly. Please check *.travis* for additional dependencies and rebuild this package."
-        else
-            rethrow(ex)
-        end
-    end
+    check_deps()
 end
 
 export gmsh, @gmsh_do, @gmsh_open
