@@ -39,6 +39,7 @@ else
                         error("Gmsh library has changed, re-run Pkg.build(\\\"GmshTools\\\")")
                     end
                 end
+                include(joinpath(libpath, "gmsh.jl"))
                 """
                )
         println(io, :(const libgmsh = $libgmsh))
