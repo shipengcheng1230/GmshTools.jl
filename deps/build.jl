@@ -1,8 +1,6 @@
 using Libdl
 using Pkg
 
-Pkg.add(PackageSpec(url="https://github.com/shipengcheng1230/Gmsh_jll.jl"))
-
 const depsfile = joinpath(@__DIR__, "deps.jl")
 
 const libpath = get(ENV, "GMSH_LIB_PATH", nothing)
@@ -15,6 +13,7 @@ if libpath === nothing
             # Do not edit
             using Gmsh_SDK_jll
             check_deps() = nothing
+            include(joinpath(dirname(Gmsh_SDK_jll.libgmsh_path), "gmsh.jl"))
             """
             )
     end

@@ -10,7 +10,6 @@ deps/deps.jl
 deps/usr
 deps/*.log
 
-Manifest.toml
 .DS_Store
 
 docs/build/
