@@ -42,7 +42,7 @@ jobs:
         # - conda update -q conda
         # - conda info -a
       script:
-        - julia --project=docs -e 'using Pkg; Pkg.add(PackageSpec(url="https://github.com/shipengcheng1230/Gmsh_jll.jl"))'
+        - julia --project=docs -e 'using Pkg; Pkg.add(PackageSpec(url="https://github.com/shipengcheng1230/Gmsh_SDK_jll.jl"))'
         - julia --project=docs -e 'using Pkg; Pkg.instantiate(); Pkg.add(PackageSpec(path=pwd())); Pkg.build("GmshTools")'
         - julia --project=docs --color=yes docs/make.jl
       after_success: skip
