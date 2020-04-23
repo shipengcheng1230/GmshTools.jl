@@ -9,7 +9,7 @@ uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 
 [[Gmsh_SDK_jll]]
 deps = ["Libdl", "Pkg"]
-git-tree-sha1 = "24e797600c825cb8a8f5e26b2fbda61d897a5873"
+git-tree-sha1 = "eaf9ee0b15ec9ae186bfc43d5392c3edba90de22"
 repo-rev = "master"
 repo-url = "https://github.com/shipengcheng1230/Gmsh_jll.jl"
 uuid = "4abbd9bc-5e42-58f8-a031-9aef3230cdd8"
