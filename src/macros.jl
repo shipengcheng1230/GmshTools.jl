@@ -1,5 +1,25 @@
-export match_tuple
-export @addField
+macro gmsh_do(f)
+    quote
+        try
+            gmsh.initialize()
+            $(esc(f))
+        finally
+            gmsh.finalize()
+        end
+    end
+end
+
+macro gmsh_open(name, f)
+    quote
+        try
+            gmsh.initialize()
+            gmsh.open($(esc(name)))
+            $(esc(f))
+        finally
+            gmsh.finalize()
+        end
+    end
+end
 
 "To match the tuple expression inside `begin` block and discard the rest."
 match_tuple = @λ begin
