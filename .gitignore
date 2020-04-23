@@ -15,6 +15,7 @@ deps/*.log
 docs/build/
 docs/site/
 docs/src/examples/generated
-docs/Manifest.toml
+
+Manifest.toml
 
 *.msh

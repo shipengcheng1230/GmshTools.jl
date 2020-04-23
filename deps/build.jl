@@ -5,6 +5,9 @@ const depsfile = joinpath(@__DIR__, "deps.jl")
 
 const libpath = get(ENV, "GMSH_LIB_PATH", nothing)
 
+Pkg.activate(dirname(@__DIR__))
+Pkg.add(PackageSpec(url="https://github.com/shipengcheng1230/Gmsh_SDK_jll.jl"))
+
 if libpath === nothing
     open(depsfile, "w") do io
         print(io,
