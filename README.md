@@ -14,7 +14,7 @@ To use [Gmsh](http://gmsh.info/) mesh program.
 - Users could set the environment variable `GMSH_LIB_PATH` to your source-compiled Gmsh library
   directory and rebuild this package. For windows user, you need to create a link from `gmsh-*.*.dll` to `libgmsh.dll` since something has changed with `find_library` after Julia *v1.4*.
 
-- If your Julia is compiled with [Intel MKL](https://github.com/JuliaComputing/MKL.jl), then it must be compiled with 32 integer interface (otherwise Julia will crash due to BLAS interface incompatibility), i.e. linking to **lp64** instead of **ipl64**. To do so, in `Make.inc`, change to
+- Before Gmsh v4.6.0, if your Julia is compiled with [Intel MKL](https://github.com/JuliaComputing/MKL.jl), then it must be compiled with 32 integer interface (otherwise Julia will crash due to BLAS interface incompatibility), i.e. linking to **lp64** instead of **ipl64**. To do so, in `Make.inc`, change to
   ```makefile
   export MKL_INTERFACE_LAYER := LP64
   MKLLIB := $(MKLROOT)/lib/intel64
