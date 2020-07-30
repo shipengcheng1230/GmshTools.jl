@@ -22,10 +22,8 @@ macro gmsh_open(name, f)
 end
 
 "To match the tuple expression inside `begin` block and discard the rest."
-match_tuple = @λ begin
-    e::Expr -> e.head == :tuple ? e : nothing
-    a -> nothing
-end
+match_tuple(e::Expr) = e.head == :tuple ? e : nothing
+match_tuple(a) = nothing
 
 "To call the tuple args by `f`."
 macro fun_call_tuple(f, expr)

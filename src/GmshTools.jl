@@ -1,6 +1,5 @@
 module GmshTools
 
-using MLStyle
 using Requires
 
 const depsfile = joinpath(@__DIR__, "..", "deps", "deps.jl")
