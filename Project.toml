@@ -1,7 +1,7 @@
 name = "GmshTools"
 uuid = "82e2f556-b1bd-5f1a-9576-f93c0da5f0ee"
 authors = ["Pengcheng Shi"]
-version = "0.4.1"
+version = "0.4.2"
 
 [deps]
 Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
