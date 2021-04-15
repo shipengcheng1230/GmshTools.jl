@@ -7,17 +7,4 @@
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://shipengcheng1230.github.io/GmshTools.jl/stable/)
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://shipengcheng1230.github.io/GmshTools.jl/dev/)
 
-To use [Gmsh](http://gmsh.info/) mesh program.
-
-# Notice
-
-- Users could set the environment variable `GMSH_LIB_PATH` to your source-compiled Gmsh library
-  directory and rebuild this package. For windows user, you need to create a link from `gmsh-*.*.dll` to `libgmsh.dll` since something has changed with `find_library` after Julia *v1.4*.
-
-- Before Gmsh *v4.6.0*, if your Julia is compiled with [Intel MKL](https://github.com/JuliaComputing/MKL.jl), then it must be compiled with 32 integer interface (otherwise Julia will crash due to BLAS interface incompatibility), i.e. linking to **lp64** instead of **ipl64**. To do so, in `Make.inc`, change to
-  ```makefile
-  export MKL_INTERFACE_LAYER := LP64
-  MKLLIB := $(MKLROOT)/lib/intel64
-  ```
-
-- Since *v0.4.0*, you will need to manually install [Gmsh_SDK_jll.jl](https://github.com/shipengcheng1230/Gmsh_SDK_jll.jl), which, due to some building issues, cannot fit into [JuliaBinaryWrappers](https://github.com/JuliaBinaryWrappers) for now. The building procedure is hosted at [GmshBuilder.jl](https://github.com/shipengcheng1230/GmshBuilder.jl).
+To use [Gmsh](http://gmsh.info/) mesh program in a more convenient way.

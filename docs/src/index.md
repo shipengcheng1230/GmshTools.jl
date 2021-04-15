@@ -3,7 +3,7 @@
 
 ## Install
 ```julia
-(v1.4) pkg> add GmshTools
+(v1.6) pkg> add GmshTools
 ```
 
 ## Use Existed Library
@@ -18,7 +18,7 @@ julia> Pkg.build("GmshTools")
 
 ## SDK Version
 
-We switch to use [Gmsh_SDK_jll](https://github.com/shipengcheng1230/Gmsh_jll.jl/) after *v0.4.0*.
+We switch to use [gmsh_jll](https://github.com/JuliaBinaryWrappers/gmsh_jll.jl) after *v0.5.0*.
 
 ## Basic Usage
 
