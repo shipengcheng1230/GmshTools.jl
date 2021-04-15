@@ -1,21 +1,33 @@
 module GmshTools
 
-using Requires
+using Libdl
 
-const depsfile = joinpath(@__DIR__, "..", "deps", "deps.jl")
-# if isfile(depsfile)
-#     include(depsfile)
-# else
-#     error("GmshTools is not properly installed. Please run Pkg.build(\"GmshTools\") ",
-#           "and restart Julia.")
-# end
+deps_jl = joinpath(@__DIR__, "..", "deps", "deps.jl")
+if !isfile(deps_jl)
+  s = """
+  Package GmshTools not installed properly.
+  Run Pkg.build(\"GridapGmsh\"), restart Julia and try again.
+  """
+  error(s)
+end
 
-function __init__()
-    # check_deps()
-    @require Gmsh_SDK_jll="4abbd9bc-5e42-58f8-a031-9aef3230cdd8" begin
-        isfile(depsfile) || include(joinpath(dirname(@__DIR__), "deps", "build.jl"))
-        include(depsfile)
+include(deps_jl)
+
+if GMSH_FOUND
+  include(gmsh_jl)
+  # Hack taken from MPI.jl
+  function __init__()
+    @static if Sys.isunix()
+      Libdl.dlopen(gmsh.lib, Libdl.RTLD_LAZY | Libdl.RTLD_GLOBAL)
     end
+  end
+else
+    s = """
+    Gmsh not found in system paths.
+    Install Gmsh or export path to Gmsh and rebuild the project.
+    Run Pkg.build(\"GmshTools\"), restart Julia and try again.
+    """
+    @warn s
 end
 
 export
