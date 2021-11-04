@@ -6,7 +6,7 @@ deps_jl = joinpath(@__DIR__, "..", "deps", "deps.jl")
 if !isfile(deps_jl)
   s = """
   Package GmshTools not installed properly.
-  Run Pkg.build(\"GridapGmsh\"), restart Julia and try again.
+  Run Pkg.build(\"GmshTools\"), restart Julia and try again.
   """
   error(s)
 end

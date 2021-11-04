@@ -11,7 +11,7 @@
 ```julia
 using Pkg
 
-julia> ENV["GMSH_LIB_PATH"] = "/opt/gmsh/lib64"; # here is your `libgmsh.so` or `gmsh.dll`
+julia> ENV["GMSHROOT"] = "/opt/gmsh"; # here is your root directory of Gmsh SDK
 
 julia> Pkg.build("GmshTools")
 ```
