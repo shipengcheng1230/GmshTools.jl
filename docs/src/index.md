@@ -18,7 +18,7 @@ julia> Pkg.build("GmshTools")
 
 ## SDK Version
 
-We switch to use [gmsh_jll](https://github.com/JuliaBinaryWrappers/gmsh_jll.jl) after *v0.5.0*.
+Please check [gmsh_jll](https://github.com/JuliaBinaryWrappers/gmsh_jll.jl) for the SDK version automatically downloaded.
 
 ## Basic Usage
 
