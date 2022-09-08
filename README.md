@@ -6,5 +6,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/shipengcheng1230/GmshTools.jl/badge.svg?branch=master)](https://coveralls.io/github/shipengcheng1230/GmshTools.jl?branch=master)
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://shipengcheng1230.github.io/GmshTools.jl/stable/)
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://shipengcheng1230.github.io/GmshTools.jl/dev/)
+[![deps](https://juliahub.com/docs/GmshTools/deps.svg)](https://juliahub.com/ui/Packages/GmshTools/9rYp5?t=2)
 
 To use [Gmsh](http://gmsh.info/) mesh program in a more convenient way.
